@@ -234,8 +234,8 @@
             <div class="max-w-7xl mx-auto px-6 w-full">
                 <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 md:mb-20 text-slate-900 fade-up-element tracking-tight">三级盈利生态</h2>
                 <div class="grid md:grid-cols-3 gap-8 md:gap-12 items-stretch">
-                    <!-- 基础硬件建设卡片 -->
-                    <div onclick="window.location.href='lead1.html?product=感知基础设施'" class="bg-white p-10 md:p-14 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/40 fade-up-element delay-1 flex flex-col text-center cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                    <!-- 基础硬件建设卡片：链接已改为 lead.html -->
+                    <div onclick="window.location.href='lead.html?product=感知基础设施'" class="bg-white p-10 md:p-14 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/40 fade-up-element delay-1 flex flex-col text-center cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
                         <h3 class="text-2xl md:text-3xl font-bold mb-3 text-slate-800">基础硬件建设</h3>
                         <p class="text-slate-500 mb-8 md:mb-10 font-medium text-base md:text-lg">一次性投入，低门槛接入</p>
                         <ul class="space-y-4 md:space-y-6 text-slate-600 font-medium text-base md:text-lg mt-auto max-w-md mx-auto w-full">
@@ -244,8 +244,8 @@
                         </ul>
                     </div>
 
-                    <!-- SaaS订阅服务卡片 -->
-                    <div onclick="window.location.href='lead1.html?product=SaaS订阅服务'" class="bg-gradient-to-b from-blue-600 to-indigo-700 p-10 md:p-14 rounded-[2.5rem] shadow-2xl relative transform md:-translate-y-4 fade-up-element delay-2 text-white border border-blue-400/30 flex flex-col text-center cursor-pointer transition-all duration-300 hover:-translate-y-6 hover:shadow-3xl">
+                    <!-- SaaS订阅服务卡片：链接已改为 lead.html -->
+                    <div onclick="window.location.href='lead.html?product=SaaS订阅服务'" class="bg-gradient-to-b from-blue-600 to-indigo-700 p-10 md:p-14 rounded-[2.5rem] shadow-2xl relative transform md:-translate-y-4 fade-up-element delay-2 text-white border border-blue-400/30 flex flex-col text-center cursor-pointer transition-all duration-300 hover:-translate-y-6 hover:shadow-3xl">
                         <div class="absolute -top-5 right-6 md:right-10 bg-gradient-to-r from-amber-400 to-orange-500 text-white px-4 md:px-5 py-2 text-sm md:text-base font-bold rounded-full shadow-xl whitespace-nowrap">核心营收模型</div>
                         <h3 class="text-2xl md:text-3xl font-bold mb-3">SaaS 订阅服务</h3>
                         <p class="text-blue-200 mb-8 md:mb-10 font-medium text-base md:text-lg">按年付费，持续升级</p>
@@ -256,8 +256,8 @@
                         </ul>
                     </div>
 
-                    <!-- 数据安全与增值卡片 -->
-                    <div onclick="window.location.href='lead1.html?product=私有化部署'" class="bg-white p-10 md:p-14 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/40 fade-up-element delay-3 flex flex-col text-center cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                    <!-- 数据安全与增值卡片：链接已改为 lead.html -->
+                    <div onclick="window.location.href='lead.html?product=私有化部署'" class="bg-white p-10 md:p-14 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/40 fade-up-element delay-3 flex flex-col text-center cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
                         <h3 class="text-2xl md:text-3xl font-bold mb-3 text-slate-800">数据安全与增值</h3>
                         <p class="text-slate-500 mb-8 md:mb-10 font-medium text-base md:text-lg">针对政企客户定制化</p>
                         <ul class="space-y-4 md:space-y-6 text-slate-600 font-medium text-base md:text-lg mt-auto max-w-md mx-auto w-full">
@@ -449,12 +449,10 @@
             const mobileLinks = document.querySelectorAll('.mobile-link');
 
             if(mobileMenuBtn && mobileMenu) {
-                // 点击汉堡按钮展开/收起
                 mobileMenuBtn.addEventListener('click', () => {
                     mobileMenu.classList.toggle('hidden');
                 });
                 
-                // 点击菜单链接后自动收起
                 mobileLinks.forEach(link => {
                     link.addEventListener('click', () => {
                         mobileMenu.classList.add('hidden');
