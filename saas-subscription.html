@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#06111f">
+<title>光脉智瞳 Plus｜城市生命线智能监测平台</title>
+<style>
+:root{
+  --bg:#050b14;--bg2:#071321;--panel:rgba(10,27,45,.88);--panel2:rgba(7,19,32,.94);
+  --line:rgba(111,203,244,.16);--cyan:#42d7ff;--blue:#4c8dff;--green:#42e6a4;
+  --yellow:#ffd166;--orange:#ffad45;--red:#ff6075;--text:#eef9ff;--muted:#88a9bc;
+  --shadow:0 18px 58px rgba(0,0,0,.34)
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif;color:var(--text);
+ background:
+ radial-gradient(circle at 14% 8%,rgba(28,126,195,.16),transparent 28%),
+ radial-gradient(circle at 90% 4%,rgba(35,204,210,.09),transparent 25%),
+ linear-gradient(135deg,#030914,#06111f 50%,#071521)}
+body{overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.28;
+ background-image:linear-gradient(rgba(70,184,235,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(70,184,235,.025) 1px,transparent 1px);
+ background-size:44px 44px}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app{display:grid;grid-template-columns:244px minmax(0,1fr);min-height:100vh}
+.sidebar{height:100vh;position:sticky;top:0;padding:21px 15px 18px;background:linear-gradient(180deg,rgba(3,13,24,.99),rgba(5,17,30,.97));
+ border-right:1px solid var(--line);z-index:30}
+.brand{display:flex;align-items:center;gap:12px;padding:1px 8px 20px}
+.brand-mark{width:45px;height:45px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#2ac2ec,#1b63c8);
+ box-shadow:0 0 29px rgba(47,204,255,.32),inset 0 0 17px rgba(255,255,255,.12)}
+.brand-mark svg{width:25px;height:25px;fill:#fff;filter:drop-shadow(0 4px 8px rgba(0,0,0,.26))}
+.brand h1{font-size:17px;margin:0;letter-spacing:.06em}.brand p{font-size:10px;color:var(--muted);margin:4px 0 0}
+.nav{display:flex;flex-direction:column;gap:6px}
+.nav button{border:0;background:transparent;color:#8da9ba;border-radius:12px;padding:12px 13px;display:flex;align-items:center;gap:11px;text-align:left;transition:.22s}
+.nav button:hover{background:rgba(55,190,238,.08);color:#e8f9ff}
+.nav button.active{color:#fff;background:linear-gradient(90deg,rgba(39,143,223,.27),rgba(32,211,225,.08));
+ box-shadow:inset 3px 0 0 var(--cyan),0 8px 23px rgba(0,90,145,.13)}
+.nav .ico{width:20px;text-align:center;font-weight:700}
+.sidebar-card{position:absolute;left:15px;right:15px;bottom:17px;border:1px solid var(--line);border-radius:14px;padding:13px;background:rgba(15,41,63,.48)}
+.sidebar-card div{font-size:10px;color:#7697aa;margin-top:7px}.sidebar-card strong{font-size:12px;color:#d8f7ff}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 11px var(--green);margin-right:6px;animation:pulse 2.5s infinite}
+@keyframes pulse{50%{opacity:.35;transform:scale(.78)}}
+.main{min-width:0}
+.topbar{height:74px;padding:0 25px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20;
+ border-bottom:1px solid var(--line);background:rgba(3,12,22,.7);backdrop-filter:blur(17px)}
+.top-title h2{font-size:20px;margin:0}.top-title p{font-size:11px;color:var(--muted);margin:5px 0 0}
+.top-actions{display:flex;align-items:center;gap:9px}
+.chip{font-size:11px;color:#a8c7d8;padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:rgba(15,39,60,.56)}
+.chip strong{color:var(--green)}.clock{font-variant-numeric:tabular-nums}
+.content{padding:21px 23px 38px;max-width:1770px;margin:auto}
+.view{display:none;animation:fade .26s ease}.view.active{display:block}
+@keyframes fade{from{opacity:.25;transform:translateY(4px)}to{opacity:1;transform:none}}
+.panel{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:18px;
+ background:linear-gradient(155deg,rgba(9,27,45,.9),rgba(7,19,33,.82));box-shadow:var(--shadow)}
+.panel:after{content:"";position:absolute;right:-90px;top:-100px;width:180px;height:180px;border-radius:50%;background:rgba(58,184,255,.07);pointer-events:none}
+.panel-title{display:flex;align-items:flex-start;justify-content:space-between;gap:13px;margin-bottom:14px}
+.panel-title h3{font-size:16px;margin:0}.panel-title p{font-size:11px;color:var(--muted);margin:5px 0 0;line-height:1.5}
+.grid{display:grid;gap:17px}.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(145px,1fr));gap:13px;margin-bottom:17px}
+.kpi{padding:16px;min-height:113px}.kpi-name{font-size:11px;color:#89a7b8;display:flex;justify-content:space-between}
+.kpi-value{font-size:26px;font-weight:850;margin:13px 0 7px;font-variant-numeric:tabular-nums}.kpi-value small{font-size:12px;color:#8fb1c2;font-weight:500;margin-left:4px}
+.kpi-foot{font-size:10px;color:#68899c}.up{color:var(--green)}
+.hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(310px,.7fr);gap:17px;margin-bottom:17px}
+.hero-left{padding:23px;min-height:235px}.eyebrow{font-size:11px;color:var(--cyan);letter-spacing:.15em}
+.hero-left h3{font-size:30px;line-height:1.3;margin:10px 0 12px}.hero-left p{max-width:760px;line-height:1.75;color:#9ab6c6;font-size:13px}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.hero-tags span{font-size:11px;padding:7px 9px;border-radius:8px;border:1px solid rgba(67,205,255,.15);background:rgba(50,185,242,.07);color:#bdeeff}
+.agent-card{padding:19px;display:flex;flex-direction:column;justify-content:space-between}
+.agent-head{display:flex;justify-content:space-between;align-items:flex-start}.agent-head h4{margin:0 0 6px}.agent-head p{font-size:11px;color:var(--muted);margin:0}
+.agent-orb{width:70px;height:70px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#d9fdff 0 7%,#42dcf5 8% 21%,#156fa5 22% 45%,rgba(22,115,170,.18) 46% 69%,transparent 70%);
+ box-shadow:0 0 36px rgba(48,215,255,.34);position:relative;animation:float 3.5s ease-in-out infinite}
+.agent-orb:before,.agent-orb:after{content:"";position:absolute;border:1px solid rgba(93,221,255,.37);border-radius:50%;inset:-8px;animation:spin 8s linear infinite}.agent-orb:after{inset:-15px;border-style:dashed;animation-duration:12s;animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes float{50%{transform:translateY(-5px)}}
+.agent-progress{padding:13px;border-radius:12px;background:rgba(20,54,81,.52);border:1px solid var(--line)}
+.progress{height:6px;border-radius:8px;background:rgba(255,255,255,.06);overflow:hidden}.progress i,.progress span{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.main-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(330px,.7fr);gap:17px}
+.map-panel{padding:19px;height:421px}.map{height:334px;position:relative;border-radius:14px;overflow:hidden;background:radial-gradient(circle at 60% 48%,rgba(42,178,214,.12),transparent 30%),linear-gradient(145deg,rgba(11,44,66,.8),rgba(5,21,38,.97));border:1px solid rgba(83,191,232,.12)}
+.map svg{position:absolute;inset:0;width:100%;height:100%}.scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 12px var(--cyan);animation:scan 7.7s linear infinite}
+.map-legend{position:absolute;left:12px;top:12px;z-index:3;display:flex;gap:13px;align-items:center;padding:7px 10px;border:1px solid rgba(92,184,219,.18);border-radius:8px;background:rgba(3,18,30,.88);font-size:10px;color:#bcd7e5}.map-legend span{display:flex;align-items:center;gap:5px;white-space:nowrap}.map-legend i{display:block;width:15px;height:2px}.map-legend .gas{background:#42d7ff}.map-legend .water{background:#4c8dff}.map-legend .bridge{background:#42e6a4}.map-legend .tunnel{height:0;border-top:2px dashed #ffad45}
+@keyframes scan{from{top:3%}to{top:97%}}
+.node{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(66,230,164,.1),0 0 18px currentColor}
+.node.warn{background:var(--orange)}.node.danger{background:var(--red)}
+.node:after{content:attr(data-label);position:absolute;white-space:nowrap;left:17px;top:-5px;padding:4px 6px;border-radius:6px;font-size:10px;color:#bed8e7;background:rgba(3,17,29,.76)}
+@keyframes nodePulse{50%{transform:scale(.72);opacity:.66}}
+.side-stack{display:grid;grid-template-rows:1fr 1fr;gap:17px}.wave-panel,.alerts-panel{padding:17px;min-height:202px}canvas{width:100%;display:block}
+.badge{display:inline-flex;align-items:center;padding:4px 7px;border-radius:7px;font-size:10px}.badge.green{background:rgba(66,230,164,.12);color:#75efba}.badge.red{background:rgba(255,96,117,.13);color:#ff8f9e}.badge.orange{background:rgba(255,173,69,.13);color:#ffc16f}.badge.blue{background:rgba(76,141,255,.13);color:#88b5ff}
+.alert-list{display:flex;flex-direction:column;gap:9px}.alert{display:grid;grid-template-columns:8px 1fr auto;gap:9px;align-items:center;padding:10px;border-radius:10px;border:1px solid rgba(96,195,233,.09);background:rgba(13,37,57,.58)}
+.alert-dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 9px currentColor}.alert.red .alert-dot{background:var(--red)}.alert.blue .alert-dot{background:var(--blue)}
+.alert strong{font-size:11px}.alert p{font-size:9px;color:#7898aa;margin:3px 0 0}.score{font-size:11px;font-variant-numeric:tabular-nums}
+.table-panel{padding:18px}.data-table{width:100%;border-collapse:collapse;font-size:11px}.data-table th{text-align:left;color:#7696a8;font-weight:500;padding:10px 8px;border-bottom:1px solid var(--line)}
+.data-table td{padding:11px 8px;border-bottom:1px solid rgba(111,195,227,.07)}.data-table tr:hover td{background:rgba(50,176,224,.035)}
+.mini-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:17px}.mini{padding:16px}.mini span{font-size:11px;color:var(--muted)}.mini strong{display:block;font-size:22px;margin:10px 0 5px;font-variant-numeric:tabular-nums}.mini p{font-size:10px;color:#6d8da0;margin:0}
+.monitor-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(340px,.65fr);gap:17px}.chart-big{padding:18px;min-height:400px}.chart-big canvas{height:310px}.signal-controls{display:flex;gap:8px;flex-wrap:wrap}.small-btn,.primary-btn,.ghost-btn{border-radius:10px;padding:9px 12px;border:1px solid var(--line);color:#bfe3f3;background:rgba(20,52,77,.57);cursor:pointer;text-decoration:none}
+.primary-btn{border:0;color:#04131e;font-weight:800;background:linear-gradient(135deg,var(--cyan),#4f9dff);box-shadow:0 10px 24px rgba(45,181,236,.19)}
+.small-btn:hover,.ghost-btn:hover{border-color:rgba(70,210,255,.42);color:#fff}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature-card{padding:16px}.feature-card h4{margin:0 0 8px;font-size:14px}.feature-card p{margin:0;color:#83a4b6;font-size:11px;line-height:1.65}
+.agent-layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(350px,.8fr);gap:17px}.agent-workbench{padding:19px}.sample-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:14px 0}
+.sample-btn{padding:11px 7px;border-radius:10px;border:1px solid var(--line);background:rgba(16,43,65,.55);color:#87a8ba;font-size:11px}.sample-btn.active{color:#fff;border-color:rgba(66,215,255,.47);background:rgba(41,144,205,.2)}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:12px 0}.flow-step{padding:11px 7px;text-align:center;border:1px solid var(--line);border-radius:10px;background:rgba(17,47,71,.52);font-size:10px;color:#84a6b8}
+.flow-step.active{color:#fff;border-color:rgba(66,215,255,.53);box-shadow:0 0 20px rgba(52,199,249,.1)}
+.agent-bottom{display:grid;grid-template-columns:1fr .9fr;gap:14px;margin-top:14px}.probs{display:flex;flex-direction:column;gap:9px}.prob-row{display:grid;grid-template-columns:73px 1fr 42px;gap:7px;align-items:center;font-size:10px}.bar{height:7px;border-radius:8px;background:rgba(255,255,255,.06);overflow:hidden}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:8px;transition:width 1s}
+.result-card{padding:14px;border-radius:12px;border:1px solid rgba(255,112,105,.18);background:linear-gradient(145deg,rgba(78,35,33,.38),rgba(28,39,55,.58))}.result-card h4{font-size:19px;margin:7px 0 5px}.result-card p{font-size:10px;color:#8cabbc;line-height:1.65;margin:0}
+.log-list{padding:18px}.log-item{display:grid;grid-template-columns:65px 12px 1fr;gap:8px;font-size:10px;padding:9px 0;border-bottom:1px solid rgba(107,193,225,.07)}.log-item .time{color:#7899aa}.log-item .circle{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);margin-top:3px}
+.device-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.device-card{padding:17px}.device-head{display:flex;justify-content:space-between}.device-head h4{font-size:14px;margin:0}.device-head p{font-size:10px;color:var(--muted);margin:5px 0 0}.device-values{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:15px}.device-values div{padding:9px;border-radius:9px;background:rgba(255,255,255,.035)}.device-values span{display:block;font-size:9px;color:#7898aa}.device-values strong{font-size:13px;margin-top:5px;display:block}
+.report-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.report-card{padding:18px;min-height:183px}.report-card h4{font-size:14px;margin:0 0 9px}.report-card p{font-size:11px;color:#84a4b5;line-height:1.65}.report-card .num{font-size:26px;font-weight:850;color:#eafaff;margin:16px 0 5px;font-variant-numeric:tabular-nums}
+
+/* 订阅服务：按此前 PulseVision 同款内容接入 */
+.pricing-shell{padding:22px}
+.pricing-title{text-align:center;margin:4px 0 35px}.pricing-title h3{margin:0;font-size:clamp(30px,3vw,46px);font-weight:900;letter-spacing:-.05em}.pricing-title p{max-width:770px;margin:12px auto 0;color:var(--muted);font-size:14px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:27px;align-items:stretch}
+.pulse-pricing-card{position:relative;min-height:342px;padding:42px 37px;border-radius:38px;display:flex;flex-direction:column;text-align:center;transition:.28s;cursor:pointer}
+.pulse-pricing-card:not(.featured){background:#fff;color:#1e293b;border:1px solid rgba(226,232,240,.96);box-shadow:0 22px 44px rgba(148,163,184,.15)}
+.pulse-pricing-card:not(.featured):hover{transform:translateY(-8px);box-shadow:0 30px 56px rgba(15,23,42,.24)}
+.pulse-pricing-card.featured{background:linear-gradient(180deg,#2563eb,#4338ca);color:#fff;border:1px solid rgba(96,165,250,.45);box-shadow:0 30px 70px rgba(37,99,235,.32);transform:translateY(-14px)}
+.pulse-pricing-card.featured:hover{transform:translateY(-21px);box-shadow:0 38px 82px rgba(37,99,235,.42)}
+.pulse-pricing-badge{position:absolute;top:-18px;right:30px;padding:9px 18px;border-radius:999px;background:linear-gradient(90deg,#fbbf24,#f97316);color:#fff;font-weight:900;font-size:13px;box-shadow:0 14px 28px rgba(249,115,22,.32)}
+.pulse-pricing-card h3{margin:0 0 12px;font-size:clamp(23px,2vw,30px);font-weight:900;letter-spacing:-.04em}.pulse-pricing-card p{margin:0 0 31px;font-size:16px;font-weight:650}
+.pulse-pricing-card:not(.featured) p{color:#64748b}.pulse-pricing-card.featured p{color:#bfdbfe}
+.pulse-pricing-list{list-style:none;padding:0;margin:auto 0 0;display:grid;gap:19px;width:100%}.pulse-pricing-list li{display:flex;align-items:center;justify-content:space-between;gap:13px;padding-bottom:14px;font-size:16px;font-weight:650}
+.pulse-pricing-card:not(.featured) li{color:#475569;border-bottom:1px solid #f1f5f9}.pulse-pricing-card:not(.featured) strong{color:#0f172a;font-size:19px}.pulse-pricing-card.featured li{color:#eff6ff;border-bottom:1px solid rgba(59,130,246,.56)}.pulse-pricing-card.featured strong{color:#fff;font-size:19px}
+.pulse-lead-panel{margin-top:29px;padding:23px;border-radius:27px;background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(43,212,255,.08));border:1px solid rgba(43,212,255,.22);display:flex;align-items:center;justify-content:space-between;gap:17px}
+.pulse-lead-panel h4{font-size:19px;margin:0 0 6px}.pulse-lead-panel p{font-size:12px;color:var(--muted);line-height:1.65;margin:0}
+.modal-mask{display:none;position:fixed;inset:0;z-index:100;background:rgba(2,8,15,.78);backdrop-filter:blur(10px);place-items:center;padding:20px}.modal-mask.show{display:grid}
+.modal{width:min(790px,96vw);max-height:90vh;overflow:auto;padding:22px;border-radius:23px;background:linear-gradient(180deg,#10243b,#091a2d);border:1px solid rgba(67,211,255,.26);box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}.modal-head h3{margin:0;font-size:21px}.modal-head p{font-size:11px;color:var(--muted);margin:6px 0 0}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.form-item{padding:12px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.035)}.form-item label{display:block;font-size:10px;color:var(--muted);margin-bottom:7px}.form-item input,.form-item select,.form-item textarea{width:100%;border:1px solid var(--line);background:rgba(0,0,0,.17);color:var(--text);border-radius:9px;padding:9px}.form-item option{color:#111}
+.quote-box{padding:14px;border-radius:13px;border:1px solid rgba(124,245,184,.25);background:rgba(124,245,184,.08);color:#d8ffe9;font-size:12px;line-height:1.65;margin-top:13px}
+.modal-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
+.toast{position:fixed;right:23px;bottom:23px;z-index:150;padding:12px 15px;border-radius:11px;border:1px solid rgba(73,211,255,.25);background:#0e263b;color:#dff8ff;box-shadow:var(--shadow);opacity:0;transform:translateY(8px);transition:.25s;font-size:11px}.toast.show{opacity:1;transform:none}
+.empty-space{height:8px}
+@media(max-width:1280px){.kpis{grid-template-columns:repeat(3,1fr)}.hero,.main-grid,.monitor-grid,.agent-layout{grid-template-columns:1fr}.device-grid,.report-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1050px){.pricing-grid{grid-template-columns:1fr}.pulse-pricing-card.featured{transform:none}.pulse-pricing-card.featured:hover{transform:translateY(-8px)}.pulse-lead-panel{align-items:flex-start;flex-direction:column}}
+@media(max-width:900px){.app{grid-template-columns:82px 1fr}.sidebar{padding:17px 9px}.brand h1,.brand p,.nav .txt,.sidebar-card{display:none}.brand{justify-content:center;padding-left:0;padding-right:0}.nav button{justify-content:center}.content{padding:15px}.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.mini-metrics{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.app{display:block}.sidebar{display:none}.topbar{padding:0 13px}.top-actions .chip:first-child{display:none}.content{padding:11px}.kpis{grid-template-columns:repeat(2,1fr)}.device-grid,.report-grid,.feature-grid{grid-template-columns:1fr}.sample-row,.flow{grid-template-columns:repeat(2,1fr)}.agent-bottom,.form-grid{grid-template-columns:1fr}.hero-left h3{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><svg viewBox="0 0 24 24"><path d="M13.6 1.8 4 13.2h7.2l-1.1 9 9.9-13.4h-7.4l1-7Z"/></svg></div>
+  <div><h1>光脉智瞳 Plus</h1><p>城市生命线光纤神经元</p></div>
+    </div>
+    <nav class="nav" id="nav">
+      <button class="active" data-view="overview"><span class="ico">◈</span><span class="txt">综合驾驶舱</span></button>
+      <button data-view="gis"><span class="ico">⌖</span><span class="txt">GIS 数字孪生</span></button>
+      <button data-view="monitor"><span class="ico">〽</span><span class="txt">实时监测</span></button>
+      <button data-view="alerts"><span class="ico">⚠</span><span class="txt">AI 预警中心</span></button>
+      <button data-view="agent"><span class="ico">◎</span><span class="txt">智能体中心</span></button>
+      <button data-view="devices"><span class="ico">▣</span><span class="txt">设备与光纤</span></button>
+      <button data-view="plans"><span class="ico">￥</span><span class="txt">订阅服务</span></button>
+      <button data-view="reports"><span class="ico">▤</span><span class="txt">报表中心</span></button>
+    </nav>
+    <div class="sidebar-card"><strong><span class="dot"></span>平台运行正常</strong><div>数据链路 8 / 8 在线</div><div>边缘推理节点在线</div></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="top-title"><h2 id="pageTitle">综合驾驶舱</h2><p id="pageSub">分布式光纤连续感知 · 多模态 AI 识别 · Agent 自动处置</p></div>
+      <div class="top-actions"><div class="chip">运行模式：<strong>标准样本</strong></div><div class="chip">节点：<strong>在线</strong></div><div class="chip clock" id="clock">--</div></div>
+    </header>
+    <section class="content">
+
+      <!-- 1 综合驾驶舱 -->
+      <div class="view active" id="view-overview">
+        <div class="hero">
+          <section class="panel hero-left">
+            <div class="eyebrow">FiberGuard Intelligent Operations</div>
+            <h3>用一根光纤，构建城市生命线连续感知与智能处置闭环</h3>
+            <p>融合分布式光纤振动、温度、应变与声学信息，通过轻量级深度学习模型完成异常检测和事件识别，并由 FiberGuard Agent 自动执行风险分级、GIS 定位、工单生成与报告归档。</p>
+            <div class="hero-tags"><span>连续覆盖 25.0 km</span><span>1D-CNN 多模态识别</span><span>四级风险分级</span><span>Agent 自动闭环</span><span>边缘推理</span></div>
+          </section>
+          <section class="panel agent-card">
+            <div class="agent-head"><div><h4>FiberGuard Agent</h4><p>当前任务：燃气主干线 A 风险巡检</p></div><div class="agent-orb">◎</div></div>
+            <div class="agent-progress"><div style="display:flex;justify-content:space-between;font-size:11px"><span>本轮自动分析进度</span><strong id="overviewAgentProgress">68%</strong></div><div class="progress" style="margin-top:9px"><i id="overviewProgressBar" style="width:68%"></i></div><div style="display:flex;justify-content:space-between;margin-top:10px;font-size:9px;color:#7898aa"><span>FiberFusion-1D v1.2</span><span>规则引擎 R4.3</span></div></div>
+          </section>
+        </div>
+
+        <div class="kpis">
+          <div class="panel kpi"><div class="kpi-name">在线监测距离<span class="up">●</span></div><div class="kpi-value"><span data-live="distance">25.00</span><small>km</small></div><div class="kpi-foot">8 条通道持续在线</div></div>
+          <div class="panel kpi"><div class="kpi-name">AI识别置信度<span class="up">↗</span></div><div class="kpi-value"><span data-live="confidence">96.72</span><small>%</small></div><div class="kpi-foot">多模态融合推理结果</div></div>
+          <div class="panel kpi"><div class="kpi-name">平均定位精度<span class="up">●</span></div><div class="kpi-value"><span data-live="accuracy">4.82</span><small>m</small></div><div class="kpi-foot">高风险事件空间定位</div></div>
+          <div class="panel kpi"><div class="kpi-name">本日处理事件<span class="up">+3</span></div><div class="kpi-value"><span data-live="events">1286</span><small>条</small></div><div class="kpi-foot">自动归档率 82.4%</div></div>
+          <div class="panel kpi"><div class="kpi-name">模型推理时延<span class="up">●</span></div><div class="kpi-value"><span data-live="latency">38.2</span><small>ms</small></div><div class="kpi-foot">边缘计算节点实时推理</div></div>
+          <div class="panel kpi"><div class="kpi-name">设备健康度<span class="up">↗</span></div><div class="kpi-value"><span data-live="health">97.36</span><small>%</small></div><div class="kpi-foot">解调仪与光纤链路综合</div></div>
+        </div>
+
+        <div class="main-grid">
+          <section class="panel map-panel">
+            <div class="panel-title"><div><h3>全域感知网络</h3><p>燃气、供水、桥梁、隧道关键设施统一接入</p></div><span class="badge green">8 条通道在线</span></div>
+            <div class="map map-shared">
+              <div class="scan"></div>
+              <div class="map-legend"><span><i class="gas"></i>燃气管线</span><span><i class="water"></i>供水管线</span><span><i class="bridge"></i>桥梁监测光纤</span><span><i class="tunnel"></i>隧道监测光纤</span></div>
+              <svg viewBox="0 0 900 420" preserveAspectRatio="none"><g stroke="rgba(111,170,197,.12)"><path d="M0 70H900M0 140H900M0 210H900M0 280H900M0 350H900"/><path d="M90 0V420M180 0V420M270 0V420M360 0V420M450 0V420M540 0V420M630 0V420M720 0V420M810 0V420"/></g><g fill="none" stroke-linecap="round"><path d="M40 330C130 290 190 350 275 280S420 230 505 260S655 180 850 130" stroke="#42d7ff" stroke-width="2.4"/><path d="M65 100C190 145 230 80 350 125S560 210 820 270" stroke="#4c8dff" stroke-width="2"/><path d="M110 380C240 300 305 350 390 310S560 320 740 370" stroke="#42e6a4" stroke-width="2"/><path d="M315 25C370 110 420 130 480 135S600 110 690 40" stroke="#ffad45" stroke-width="2" stroke-dasharray="6 7"/></g></svg>
+              <div class="node" style="left:12%;top:72%" data-label="供水输送线 B"></div><div class="node warn" style="left:35%;top:60%" data-label="桥梁监测 C"></div><div class="node danger" style="left:58%;top:57%" data-label="燃气主干线 A · K12+430"></div><div class="node" style="left:76%;top:31%" data-label="隧道监测 D"></div>
+            </div>
+          </section>
+          <div class="side-stack">
+            <section class="panel wave-panel"><div class="panel-title"><div><h3>实时多物理量监测</h3><p>最近30秒数据窗口</p></div><span class="badge green">LIVE</span></div><canvas class="wave-canvas" width="520" height="155"></canvas></section>
+            <section class="panel alerts-panel"><div class="panel-title"><div><h3>实时风险预警</h3><p>AI识别 + Agent处置</p></div><span class="badge red">4条</span></div><div class="alert-list"><div class="alert red"><div class="alert-dot"></div><div><strong>第三方施工风险</strong><p>燃气主干线A · K12+430</p></div><div class="score dynamic-score" data-base="96.4">96.4%</div></div><div class="alert"><div class="alert-dot"></div><div><strong>异常温升趋势</strong><p>隧道监测D · K06+810</p></div><div class="score dynamic-score" data-base="87.2">87.2%</div></div><div class="alert blue"><div class="alert-dot"></div><div><strong>结构微形变</strong><p>桥梁监测C · S2墩</p></div><div class="score dynamic-score" data-base="82.8">82.8%</div></div></div></section>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 GIS -->
+      <div class="view" id="view-gis">
+        <div class="mini-metrics">
+          <div class="panel mini"><span>接入区域</span><strong>4</strong><p>燃气、供水、桥梁、隧道</p></div>
+          <div class="panel mini"><span>在线点位</span><strong data-live="points">42</strong><p>重点设施连续监测</p></div>
+          <div class="panel mini"><span>当前风险点</span><strong data-live="risks">4</strong><p>1条红色 / 2条橙色</p></div>
+          <div class="panel mini"><span>定位刷新</span><strong data-live="refresh">1.2s</strong><p>边缘节点同步更新</p></div>
+        </div>
+        <section class="panel map-panel" style="height:620px">
+          <div class="panel-title"><div><h3>GIS数字孪生全景图</h3><p>管线、设备、风险、工单和实时状态统一映射</p></div><div class="signal-controls"><button class="small-btn" onclick="showToast('已定位燃气主干线A')">燃气管网</button><button class="small-btn" onclick="showToast('已切换供水输送线B')">供水管线</button><button class="small-btn" onclick="showToast('风险热力图已刷新')">风险热力</button></div></div>
+          <div class="map map-shared" style="height:520px">
+            <div class="scan"></div>
+            <div class="map-legend"><span><i class="gas"></i>燃气管线</span><span><i class="water"></i>供水管线</span><span><i class="bridge"></i>桥梁监测光纤</span><span><i class="tunnel"></i>隧道监测光纤</span></div>
+            <svg viewBox="0 0 1100 560" preserveAspectRatio="none"><g stroke="rgba(111,170,197,.1)"><path d="M0 70H1100M0 140H1100M0 210H1100M0 280H1100M0 350H1100M0 420H1100M0 490H1100"/><path d="M100 0V560M200 0V560M300 0V560M400 0V560M500 0V560M600 0V560M700 0V560M800 0V560M900 0V560M1000 0V560"/></g><g fill="none" stroke-linecap="round"><path d="M50 420C180 350 270 440 390 330S610 260 720 310S880 205 1040 170" stroke="#42d7ff" stroke-width="3"/><path d="M70 120C235 180 320 80 480 150S720 250 1010 350" stroke="#4c8dff" stroke-width="2.5"/><path d="M130 500C290 380 420 485 560 410S810 435 950 500" stroke="#42e6a4" stroke-width="2.5"/><path d="M370 35C440 150 515 175 620 145S790 95 875 35" stroke="#ffad45" stroke-width="2.5" stroke-dasharray="8 9"/></g></svg>
+            <div class="node" style="left:11%;top:72%" data-label="DAS-GM-001"></div><div class="node" style="left:28%;top:60%" data-label="供水B-04"></div><div class="node warn" style="left:42%;top:55%" data-label="桥梁C-S2墩"></div><div class="node danger" style="left:62%;top:52%" data-label="燃气A · K12+430"></div><div class="node" style="left:79%;top:31%" data-label="隧道D-K06"></div><div class="node warn" style="left:88%;top:66%" data-label="供水B-K18"></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- 3 实时监测 -->
+      <div class="view" id="view-monitor">
+        <div class="mini-metrics">
+          <div class="panel mini"><span>当前通道</span><strong>CH-01</strong><p>燃气主干线A</p></div><div class="panel mini"><span>振动强度</span><strong><span data-live="vibration">31.6</span>dB</strong><p>连续时序采样</p></div><div class="panel mini"><span>温度</span><strong><span data-live="temperature">26.4</span>℃</strong><p>缓慢变化趋势</p></div><div class="panel mini"><span>应变</span><strong><span data-live="strain">0.126</span>mm</strong><p>处于正常范围</p></div>
+        </div>
+        <div class="monitor-grid">
+          <section class="panel chart-big"><div class="panel-title"><div><h3>实时信号时序曲线</h3><p>振动、温度、应变多物理量同步采样</p></div><div class="signal-controls"><button class="small-btn">30秒</button><button class="small-btn">5分钟</button><button class="primary-btn" onclick="showToast('当前监测片段已保存')">保存片段</button></div></div><canvas class="monitor-canvas" width="980" height="315"></canvas></section>
+          <section class="panel table-panel"><div class="panel-title"><div><h3>通道实时状态</h3><p>解调仪与光纤链路</p></div><span class="badge green">8/8在线</span></div><table class="data-table"><thead><tr><th>通道</th><th>对象</th><th>信号</th><th>状态</th></tr></thead><tbody><tr><td>CH-01</td><td>燃气A</td><td data-live="signal1">-18.6dB</td><td><span class="badge green">在线</span></td></tr><tr><td>CH-02</td><td>供水B</td><td data-live="signal2">-20.2dB</td><td><span class="badge green">在线</span></td></tr><tr><td>CH-03</td><td>桥梁C</td><td data-live="signal3">-19.4dB</td><td><span class="badge orange">关注</span></td></tr><tr><td>CH-04</td><td>隧道D</td><td data-live="signal4">-18.9dB</td><td><span class="badge green">在线</span></td></tr></tbody></table></section>
+        </div>
+      </div>
+
+      <!-- 4 AI预警 -->
+      <div class="view" id="view-alerts">
+        <div class="mini-metrics">
+          <div class="panel mini"><span>今日预警</span><strong data-live="alertCount">28</strong><p>较昨日下降 7.3%</p></div><div class="panel mini"><span>红色预警</span><strong>1</strong><p>已进入处置流程</p></div><div class="panel mini"><span>平均置信度</span><strong><span data-live="alertConfidence">93.6</span>%</strong><p>多模型融合输出</p></div><div class="panel mini"><span>自动派单率</span><strong><span data-live="dispatch">82.4</span>%</strong><p>工单闭环持续提升</p></div>
+        </div>
+        <section class="panel table-panel">
+          <div class="panel-title"><div><h3>AI预警中心</h3><p>异常检测、事件分类、风险分级和处置建议</p></div><button class="primary-btn" onclick="showToast('当前预警已批量生成处置单')">批量派单</button></div>
+          <table class="data-table"><thead><tr><th>事件编号</th><th>事件类型</th><th>位置</th><th>置信度</th><th>等级</th><th>状态</th><th>操作</th></tr></thead><tbody>
+            <tr><td>EV-0826</td><td>第三方施工</td><td>燃气A · K12+430</td><td class="dynamic-score" data-base="96.4">96.4%</td><td><span class="badge red">红色</span></td><td>处理中</td><td><button class="small-btn" onclick="openAnalysis()">模型详情</button></td></tr>
+            <tr><td>EV-0825</td><td>异常温升</td><td>隧道D · K06+810</td><td class="dynamic-score" data-base="91.8">91.8%</td><td><span class="badge orange">橙色</span></td><td>已派单</td><td><button class="small-btn" onclick="showToast('已打开事件详情')">查看</button></td></tr>
+            <tr><td>EV-0824</td><td>结构微形变</td><td>桥梁C · S2墩</td><td class="dynamic-score" data-base="88.7">88.7%</td><td><span class="badge orange">黄色</span></td><td>复核中</td><td><button class="small-btn" onclick="showToast('样本已回写训练库')">回写</button></td></tr>
+            <tr><td>EV-0823</td><td>环境扰动</td><td>供水B · K18+220</td><td class="dynamic-score" data-base="76.2">76.2%</td><td><span class="badge blue">蓝色</span></td><td>已过滤</td><td><button class="small-btn" onclick="showToast('事件已归档')">归档</button></td></tr>
+          </tbody></table>
+        </section>
+        <div class="feature-grid" style="margin-top:17px"><section class="panel feature-card"><h4>多模态识别</h4><p>振动、声学、温度、应变与设备健康状态联合判断，降低单一信号误报。</p></section><section class="panel feature-card"><h4>风险规则融合</h4><p>结合设施类型、持续时间、历史事件和施工许可信息进行四级风险分级。</p></section><section class="panel feature-card"><h4>处置闭环</h4><p>预警生成后自动关联责任部门、响应时限、GIS点位和事件报告。</p></section></div>
+      </div>
+
+      <!-- 5 智能体中心 -->
+      <div class="view" id="view-agent">
+        <div class="mini-metrics"><div class="panel mini"><span>智能体状态</span><strong style="color:var(--green)">在线</strong><p>FiberGuard Agent</p></div><div class="panel mini"><span>模型版本</span><strong>v1.2</strong><p>1D-CNN + MLP</p></div><div class="panel mini"><span>已处理事件</span><strong data-live="agentEvents">1286</strong><p>自动执行任务</p></div><div class="panel mini"><span>自动闭环率</span><strong><span data-live="agentClosed">82.4</span>%</strong><p>工单和报告归档</p></div></div>
+        <div class="agent-layout">
+          <section class="panel agent-workbench">
+            <div class="panel-title"><div><h3>FiberGuard Agent 智能分析台</h3><p>选择标准样本并启动完整推理和处置链路</p></div><span class="badge green" id="agentRunStatus">待命</span></div>
+            <div class="sample-row"><button class="sample-btn" data-sample="normal">正常运行</button><button class="sample-btn active" data-sample="construction">第三方施工</button><button class="sample-btn" data-sample="leakage">管道泄漏</button><button class="sample-btn" data-sample="deformation">结构微形变</button><button class="sample-btn" data-sample="temperature">异常温升</button></div>
+            <canvas class="agent-canvas" width="900" height="190"></canvas>
+            <div class="flow"><div class="flow-step">数据接入</div><div class="flow-step">异常检测</div><div class="flow-step">事件分类</div><div class="flow-step">风险推理</div><div class="flow-step">工单闭环</div></div>
+            <div style="display:flex;justify-content:flex-end"><button class="primary-btn" id="runAgentBtn">开始智能识别</button></div>
+            <div class="agent-bottom">
+              <div class="probs" id="probList"></div>
+              <div class="result-card" id="agentResult"><div style="font-size:11px;color:#ff858b">● 红色风险</div><h4>第三方施工</h4><p>检测到持续性冲击振动。位置位于燃气主干线12.43km处，当前区域无登记施工许可，建议立即现场核查。</p><div style="font-size:10px;color:#b5d1df;margin-top:10px">工单 FG-20260804-0286 · 时限10分钟</div></div>
+            </div>
+          </section>
+          <section class="panel log-list"><div class="panel-title"><div><h3>自动执行日志</h3><p>Agent工具调用和业务动作</p></div></div><div id="agentLogs"></div></section>
+        </div>
+      </div>
+
+      <!-- 6 设备与光纤 -->
+      <div class="view" id="view-devices">
+        <div class="mini-metrics"><div class="panel mini"><span>解调仪</span><strong>4台</strong><p>3台在线 / 1台巡检</p></div><div class="panel mini"><span>光纤通道</span><strong><span data-live="channels">22</span>/24</strong><p>通道在线率91.7%</p></div><div class="panel mini"><span>覆盖里程</span><strong><span data-live="coverage">41.86</span>km</strong><p>燃气/供水/桥梁/隧道</p></div><div class="panel mini"><span>平均健康度</span><strong><span data-live="deviceHealth">94.2</span>%</strong><p>硬件运行状态</p></div></div>
+        <div class="device-grid">
+          <section class="panel device-card"><div class="device-head"><div><h4>1号分布式光纤解调仪</h4><p>DAS-GM-001 · 燃气主干线A</p></div><span class="badge green">在线</span></div><div class="device-values"><div><span>监测距离</span><strong data-live="d1dist">12.8km</strong></div><div><span>通道</span><strong>8/8</strong></div><div><span>机柜温度</span><strong data-live="d1temp">26.4℃</strong></div></div><div style="margin-top:14px"><div style="font-size:10px;color:#7898aa">健康度 97%</div><div class="progress" style="margin-top:7px"><span style="width:97%"></span></div></div></section>
+          <section class="panel device-card"><div class="device-head"><div><h4>2号分布式光纤解调仪</h4><p>DAS-GM-002 · 供水输送线B</p></div><span class="badge green">在线</span></div><div class="device-values"><div><span>监测距离</span><strong data-live="d2dist">10.6km</strong></div><div><span>通道</span><strong>6/6</strong></div><div><span>机柜温度</span><strong data-live="d2temp">25.8℃</strong></div></div><div style="margin-top:14px"><div style="font-size:10px;color:#7898aa">健康度 95%</div><div class="progress" style="margin-top:7px"><span style="width:95%"></span></div></div></section>
+          <section class="panel device-card"><div class="device-head"><div><h4>3号结构监测解调仪</h4><p>DAS-GM-003 · 桥梁监测C</p></div><span class="badge orange">巡检</span></div><div class="device-values"><div><span>监测距离</span><strong data-live="d3dist">8.4km</strong></div><div><span>通道</span><strong>4/6</strong></div><div><span>机柜温度</span><strong data-live="d3temp">27.1℃</strong></div></div><div style="margin-top:14px"><div style="font-size:10px;color:#7898aa">健康度 88%</div><div class="progress" style="margin-top:7px"><span style="width:88%;background:linear-gradient(90deg,var(--orange),var(--yellow))"></span></div></div></section>
+          <section class="panel device-card"><div class="device-head"><div><h4>4号温度监测解调仪</h4><p>DTS-GM-004 · 隧道监测D</p></div><span class="badge green">在线</span></div><div class="device-values"><div><span>监测距离</span><strong data-live="d4dist">10.1km</strong></div><div><span>通道</span><strong>4/4</strong></div><div><span>机柜温度</span><strong data-live="d4temp">26.0℃</strong></div></div><div style="margin-top:14px"><div style="font-size:10px;color:#7898aa">健康度 96%</div><div class="progress" style="margin-top:7px"><span style="width:96%"></span></div></div></section>
+        </div>
+      </div>
+
+      <!-- 7 订阅服务 -->
+      <div class="view" id="view-plans">
+        <section class="panel pricing-shell">
+          <div class="pricing-title"><h3>三级盈利生态</h3><p>基础硬件建设 + SaaS订阅服务 + 数据安全增值，形成标准化采购与持续服务闭环</p></div>
+          <div class="pricing-grid">
+            <section class="pulse-pricing-card" onclick="openPlan('hardware')"><h3>基础硬件建设</h3><p>一次性投入，低门槛接入</p><ul class="pulse-pricing-list"><li><span>设备标价</span><strong>35万/台</strong></li><li><span>管网综合</span><strong>5-8万/公里</strong></li></ul></section>
+            <section class="pulse-pricing-card featured" onclick="openPlan('saas')"><div class="pulse-pricing-badge">核心营收模型</div><h3>SaaS 订阅服务</h3><p>按年付费，持续升级</p><ul class="pulse-pricing-list"><li><span>基础版</span><strong>3万元/年/百公里</strong></li><li><span>专业版</span><strong>8万元/年/百公里</strong></li><li><span>旗舰版</span><strong>20万元/年/项目</strong></li></ul></section>
+            <section class="pulse-pricing-card" onclick="openPlan('security')"><h3>数据安全与增值</h3><p>针对政企客户定制化</p><ul class="pulse-pricing-list"><li><span>私有化部署</span><strong>30-100万元</strong></li><li><span>年度安全运维</span><strong>10%-15%</strong></li></ul></section>
+          </div>
+          <div class="pulse-lead-panel"><div><h4>获取专属方案</h4><p>选择任一服务卡片后，将进入客户意向与方案配置；系统会按产品类型自动带入服务选项，便于快速提交采购、订阅或私有化部署需求。</p></div><button class="primary-btn" onclick="openPlan('saas')">立即预约咨询</button></div>
+        </section>
+      </div>
+
+      <!-- 8 报表中心 -->
+      <div class="view" id="view-reports">
+        <div class="report-grid">
+          <section class="panel report-card"><h4>平台运行日报</h4><p>监测距离、设备状态、信号质量和事件统计汇总。</p><div class="num"><span data-live="reportEvents">1286</span> 条</div><button class="small-btn" onclick="showToast('运行日报已生成')">生成日报</button></section>
+          <section class="panel report-card"><h4>AI预警分析报告</h4><p>事件类型、风险等级、模型置信度与处置闭环统计。</p><div class="num"><span data-live="reportAccuracy">93.6</span>%</div><button class="small-btn" onclick="showToast('AI预警报告已生成')">查看报告</button></section>
+          <section class="panel report-card"><h4>设备健康报告</h4><p>解调仪、通道、机柜温度和硬件巡检状态汇总。</p><div class="num"><span data-live="reportHealth">94.2</span>%</div><button class="small-btn" onclick="showToast('设备健康报告已生成')">导出报告</button></section>
+          <section class="panel report-card"><h4>Agent事件报告</h4><p>记录智能体推理摘要、工具调用、工单生成和归档结果。</p><div class="num"><span data-live="closedLoop">82.4</span>%</div><button class="small-btn" onclick="openAnalysis()">打开详情</button></section>
+          <section class="panel report-card"><h4>订阅运营分析</h4><p>客户方案、版本选择、部署方式和服务费用测算。</p><div class="num">3 级</div><button class="small-btn" onclick="switchView('plans')">查看订阅</button></section>
+          <section class="panel report-card"><h4>风险趋势周报</h4><p>近7日风险变化、重点区域和模型识别趋势。</p><div class="num">-7.3%</div><button class="small-btn" onclick="showToast('风险趋势周报已生成')">生成周报</button></section>
+        </div>
+        <section class="panel table-panel" style="margin-top:17px"><div class="panel-title"><div><h3>最近生成的报告</h3><p>平台、设备、模型和工单报告统一归档</p></div><button class="primary-btn" onclick="showToast('已打包当前全部报告')">打包导出</button></div><table class="data-table"><thead><tr><th>报告编号</th><th>报告名称</th><th>生成时间</th><th>状态</th></tr></thead><tbody><tr><td>RP-20260804-91</td><td>城市生命线平台运行日报</td><td>20:30:00</td><td><span class="badge green">已生成</span></td></tr><tr><td>RP-20260804-90</td><td>第三方施工事件分析报告</td><td>20:18:06</td><td><span class="badge green">已归档</span></td></tr><tr><td>RP-20260804-89</td><td>设备与光纤健康报告</td><td>19:50:00</td><td><span class="badge green">已生成</span></td></tr></tbody></table></section>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- 订阅配置和客户意向表单 -->
+<div class="modal-mask" id="planModal">
+  <div class="modal">
+    <div class="modal-head"><div><h3 id="planModalTitle">订阅服务配置</h3><p>按监测里程、设备数量和服务版本生成采购摘要</p></div><button class="small-btn" onclick="closePlan()">关闭</button></div>
+    <div class="form-grid">
+      <div class="form-item"><label>服务类型</label><select id="planType"><option value="basic">SaaS基础版（3万/年/百公里）</option><option value="pro">SaaS专业版（8万/年/百公里）</option><option value="ultimate">SaaS旗舰版（20万/年/项目）</option><option value="hardware">基础硬件建设（35万/台）</option><option value="private">私有化部署（30-100万元）</option></select></div>
+      <div class="form-item"><label>监测里程（公里）</label><input id="planKm" type="number" value="120" min="1"></div>
+      <div class="form-item"><label>解调仪数量（台）</label><input id="planDevices" type="number" value="4" min="1"></div>
+      <div class="form-item"><label>部署方式</label><select id="deployMode"><option>云端SaaS</option><option>本地化部署</option><option>专属私有云</option></select></div>
+      <div class="form-item"><label>联系人</label><input id="contactName" placeholder="请输入姓名"></div>
+      <div class="form-item"><label>联系电话</label><input id="contactPhone" placeholder="请输入联系电话"></div>
+      <div class="form-item" style="grid-column:1/-1"><label>项目需求</label><textarea id="contactNeed" rows="3" placeholder="监测对象、预计里程、部署区域及其他需求"></textarea></div>
+    </div>
+    <div class="quote-box" id="quoteBox">预计年度服务费：9.6万元；硬件基础建设：140万元。</div>
+    <div class="modal-actions"><button class="primary-btn" onclick="updateQuote()">生成采购清单</button><button class="ghost-btn" onclick="submitLead()">提交方案需求</button></div>
+  </div>
+</div>
+
+<!-- 模型详情 -->
+<div class="modal-mask" id="analysisModal">
+  <div class="modal">
+    <div class="modal-head"><div><h3>模型推理详情</h3><p>FiberFusion-1D 多模态事件识别结果</p></div><button class="small-btn" onclick="closeAnalysis()">关闭</button></div>
+    <div class="mini-metrics" style="grid-template-columns:repeat(4,1fr)"><div class="panel mini"><span>识别事件</span><strong style="font-size:17px">第三方施工</strong><p>燃气主干线A</p></div><div class="panel mini"><span>置信度</span><strong>96.4%</strong><p>五分类输出</p></div><div class="panel mini"><span>异常分数</span><strong>0.872</strong><p>自动编码器</p></div><div class="panel mini"><span>推理耗时</span><strong>38.2ms</strong><p>边缘节点</p></div></div>
+    <div class="quote-box">检测到持续性冲击振动；事件位置位于燃气主干线12.43公里处；当前区域无登记施工许可；异常持续时间达到18秒；综合判断为第三方施工高风险事件。</div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const viewMeta={
+ overview:['综合驾驶舱','分布式光纤连续感知 · 多模态 AI 识别 · Agent 自动处置'],
+ gis:['GIS 数字孪生','管线、设备、风险点位与工单状态统一映射'],
+ monitor:['实时监测','振动、温度、应变与声学数据连续采集'],
+ alerts:['AI 预警中心','异常检测、事件分类、风险分级与处置建议'],
+ agent:['智能体中心','FiberGuard Agent 推理、决策与自动执行'],
+ devices:['设备与光纤','解调仪、通道、光纤路由和设备健康度管理'],
+ plans:['订阅服务','基础硬件建设、SaaS订阅和数据安全增值'],
+ reports:['报表中心','平台运行、模型分析、设备健康和事件报告']
+};
+let currentView='overview';
+function switchView(id){
+ currentView=id;
+ document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+id));
+ document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));
+ document.getElementById('pageTitle').textContent=viewMeta[id][0];
+ document.getElementById('pageSub').textContent=viewMeta[id][1];
+ window.scrollTo({top:0,behavior:'smooth'});
+ setTimeout(()=>resizeAndDraw(),80);
+}
+document.querySelectorAll('#nav button').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.view)));
+
+function tickClock(){document.getElementById('clock').textContent=new Date().toLocaleString('zh-CN',{hour12:false})}
+tickClock();setInterval(tickClock,1000);
+
+function showToast(text){const t=document.getElementById('toast');t.textContent=text;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),1700)}
+window.showToast=showToast;window.switchView=switchView;
+
+/* 多周期慢变化：主周期约5分钟，辅助周期7-13分钟 */
+const liveConfigs={
+ distance:[25,.06,2,[307,431,593],.2],confidence:[96.72,.42,2,[283,419,647],1.1],accuracy:[4.82,.14,2,[331,467,719],2.2],
+ events:[1286,6.2,0,[353,509,809],.8],latency:[38.2,2.6,1,[317,487,661],2.9],health:[97.36,.31,2,[367,523,787],1.7],
+ points:[42,.65,0,[389,541,823],.4],risks:[4,.3,0,[421,601,877],1.4],refresh:[1.2,.08,1,[347,503,739],.7],
+ vibration:[31.6,2.1,1,[311,457,683],1.2],temperature:[26.4,.35,1,[337,491,751],2.1],strain:[.126,.008,3,[373,557,811],.2],
+ alertCount:[28,1.1,0,[359,521,787],1.4],alertConfidence:[93.6,.36,1,[313,479,701],2.3],dispatch:[82.4,.7,1,[401,557,829],.45],
+ agentEvents:[1286,5.5,0,[353,509,809],.8],agentClosed:[82.4,.7,1,[401,557,829],.45],channels:[22,.35,0,[431,619,887],1],
+ coverage:[41.86,.08,2,[347,503,739],.4],deviceHealth:[94.2,.33,1,[389,541,823],1.7],reportEvents:[1286,6,0,[353,509,809],.8],
+ reportAccuracy:[93.6,.36,1,[313,479,701],2.3],reportHealth:[94.2,.33,1,[389,541,823],1.7],closedLoop:[82.4,.7,1,[401,557,829],.45]
+};
+function wave(t,c){const p=c[3],ph=c[4];return Math.sin(t*6.283/p[0]+ph)*.58+Math.sin(t*6.283/p[1]+ph*1.71)*.27+Math.sin(t*6.283/p[2]+ph*2.19)*.12}
+function animateLive(ms){
+ const t=ms/1000;
+ document.querySelectorAll('[data-live]').forEach(el=>{
+  const key=el.dataset.live,c=liveConfigs[key];if(!c)return;
+  let v=c[0]+c[1]*wave(t,c);el.textContent=c[2]===0?Math.round(v):v.toFixed(c[2]);
+ });
+ document.querySelectorAll('.dynamic-score').forEach((el,i)=>{const b=Number(el.dataset.base);el.textContent=(b+Math.sin(t/(43+i*13)+i)*.23+Math.sin(t/(71+i*19))*0.11).toFixed(1)+'%'});
+ const p=68+(Math.sin(t/51)*10+Math.sin(t/89)*5);document.getElementById('overviewAgentProgress').textContent=Math.round(p)+'%';document.getElementById('overviewProgressBar').style.width=p+'%';
+ requestAnimationFrame(animateLive)
+}requestAnimationFrame(animateLive);
+
+/* 额外带单位的动态项 */
+const textLive=[
+ ['signal1',-18.6,.22,'dB'],['signal2',-20.2,.28,'dB'],['signal3',-19.4,.24,'dB'],['signal4',-18.9,.2,'dB'],
+ ['d1dist',12.8,.04,'km'],['d2dist',10.6,.04,'km'],['d3dist',8.4,.03,'km'],['d4dist',10.1,.04,'km'],
+ ['d1temp',26.4,.25,'℃'],['d2temp',25.8,.22,'℃'],['d3temp',27.1,.28,'℃'],['d4temp',26.0,.2,'℃']
+];
+function animateTextLive(ms){const t=ms/1000;textLive.forEach((x,i)=>{document.querySelectorAll('[data-live="'+x[0]+'"]').forEach(el=>el.textContent=(x[1]+Math.sin(t/(47+i*3)+i)*x[2]).toFixed(1)+x[3])});requestAnimationFrame(animateTextLive)}
+requestAnimationFrame(animateTextLive);
+
+/* Canvas：相关噪声 + 缓慢漂移 + 非周期瞬态，避免固定正弦波和等间隔尖峰 */
+const signalCanvasStates=new WeakMap(),SIGNAL_POINTS=600,SIGNAL_STEP_MS=50,SIGNAL_VISUAL_GAIN={wave:2.25,monitor:2.55,agent:2.35};
+const signalProfiles={
+ wave:[
+  {label:'振动强度',c:'#42d7ff',base:.32,jitter:1.55,corr:.48,wander:.008,limit:5,eventRate:.0055,eventAmp:16,decay:.72},
+  {label:'温度',c:'#42e6a4',base:.63,jitter:.10,corr:.97,wander:.0038,limit:3.2,eventRate:.00005,eventAmp:1.2,decay:.96},
+  {label:'应变',c:'#ffad45',base:.84,jitter:.38,corr:.89,wander:.015,limit:6.5,eventRate:.00065,eventAmp:4.5,decay:.92}
+ ],
+ monitor:[
+  {label:'振动强度',c:'#42d7ff',base:.28,jitter:2.05,corr:.42,wander:.010,limit:7,eventRate:.0065,eventAmp:25,decay:.70},
+  {label:'温度',c:'#42e6a4',base:.55,jitter:.12,corr:.975,wander:.0048,limit:4.2,eventRate:.00008,eventAmp:1.5,decay:.97},
+  {label:'应变',c:'#ffad45',base:.78,jitter:.50,corr:.90,wander:.023,limit:10,eventRate:.0007,eventAmp:6,decay:.93}
+ ],
+ agent:[
+  {label:'振动强度',c:'#42d7ff',base:.30,jitter:1.80,corr:.45,wander:.009,limit:6,eventRate:.0058,eventAmp:21,decay:.71},
+  {label:'温度',c:'#42e6a4',base:.61,jitter:.11,corr:.97,wander:.0042,limit:3.8,eventRate:.00006,eventAmp:1.4,decay:.96},
+  {label:'应变',c:'#ffad45',base:.82,jitter:.44,corr:.90,wander:.020,limit:8.5,eventRate:.00065,eventAmp:5.5,decay:.93}
+ ]
+};
+function clampSignal(v,min,max){return Math.max(min,Math.min(max,v))}
+function normalNoise(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+function activeAgentMode(){const b=document.querySelector('.sample-btn.active');return b?b.dataset.sample:'construction'}
+function profileFor(type,mode){
+ const profiles=signalProfiles[type].map(x=>({...x}));
+ if(type!=='agent')return profiles;
+ if(mode==='normal')profiles.forEach(x=>{x.jitter*=.62;x.wander*=.55;x.eventRate*=.18;x.eventAmp*=.5});
+ if(mode==='construction'){profiles[0].eventRate=.016;profiles[0].eventAmp=25;profiles[0].jitter=1.65}
+ if(mode==='leakage'){profiles[0].jitter=2.45;profiles[0].corr=.84;profiles[0].eventRate=.002;profiles[2].jitter=.70}
+ if(mode==='deformation'){profiles[2].wander=.025;profiles[2].limit=15;profiles[2].bias=.006;profiles[2].eventRate=.0014;profiles[2].eventAmp=5}
+ if(mode==='temperature'){profiles[1].wander=.020;profiles[1].limit=14;profiles[1].bias=.008;profiles[1].eventRate=.0002}
+ return profiles;
+}
+function sampleChannel(ch,p){
+ ch.noise=ch.noise*p.corr+normalNoise()*p.jitter;
+ ch.velocity=ch.velocity*.965+normalNoise()*p.wander+(p.bias||0);
+ ch.trend+=ch.velocity;
+ if(Math.abs(ch.trend)>p.limit){ch.trend=clampSignal(ch.trend,-p.limit,p.limit);ch.velocity*=-.32}
+ if(ch.burstLeft>0){ch.burstLeft--;ch.burst=ch.burst*.72+normalNoise()*ch.burstScale}else{ch.burst*=.5;if(Math.random()<p.eventRate*.45){ch.burstLeft=4+Math.floor(Math.random()*18);ch.burstScale=p.jitter*(1.5+Math.random()*2.5)}}
+ if(Math.random()<p.eventRate)ch.impulse+=(Math.random()<.5?-1:1)*p.eventAmp*(.55+Math.random()*.9);
+ ch.impulse*=p.decay;
+ return ch.trend+ch.noise+ch.impulse+ch.burst;
+}
+function createCanvasState(canvas,type,mode){
+ const profiles=profileFor(type,mode),channels=profiles.map(()=>({noise:0,velocity:0,trend:0,impulse:0,burst:0,burstLeft:0,burstScale:0}));
+ const state={type,mode,profiles,channels,history:profiles.map(()=>[])};
+ for(let n=0;n<SIGNAL_POINTS;n++)profiles.forEach((p,i)=>state.history[i].push(sampleChannel(channels[i],p)));
+ signalCanvasStates.set(canvas,state);return state;
+}
+function getCanvasState(canvas,type){
+ const mode=type==='agent'?activeAgentMode():'default',old=signalCanvasStates.get(canvas);
+ return !old||old.type!==type||old.mode!==mode?createCanvasState(canvas,type,mode):old;
+}
+function advanceCanvas(canvas,type){
+ const state=getCanvasState(canvas,type);
+ state.profiles.forEach((p,i)=>{const h=state.history[i];h.push(sampleChannel(state.channels[i],p));if(h.length>SIGNAL_POINTS)h.shift()});
+}
+function drawCanvas(canvas,type){
+ if(!canvas)return;const ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height,state=getCanvasState(canvas,type);ctx.clearRect(0,0,w,h);
+ ctx.strokeStyle='rgba(109,190,223,.08)';ctx.lineWidth=1;for(let y=20;y<h;y+=30){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}for(let x=0;x<w;x+=60){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke()}
+ state.profiles.forEach((p,idx)=>{const data=state.history[idx],dx=w/(data.length-1),gain=SIGNAL_VISUAL_GAIN[type];ctx.beginPath();ctx.strokeStyle=p.c;ctx.lineWidth=1.8;ctx.shadowColor=p.c;ctx.shadowBlur=6;data.forEach((v,i)=>{const x=i*dx,y=clampSignal(p.base*h+v*gain,4,h-4);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();ctx.shadowBlur=0});
+ const signalUnits={振动强度:'dB',温度:'℃',应变:'mm'};ctx.font='12px "Microsoft YaHei",sans-serif';ctx.textBaseline='middle';state.profiles.forEach(p=>{const tag=p.label+' '+signalUnits[p.label],tagW=p.label==='振动强度'?102:82,x=w-tagW-10,y=clampSignal(p.base*h,14,h-14);ctx.fillStyle='rgba(3,18,30,.90)';ctx.fillRect(x,y-12,tagW,24);ctx.strokeStyle=p.c;ctx.lineWidth=1;ctx.strokeRect(x+.5,y-11.5,tagW-1,23);ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(x+10,y,3,0,Math.PI*2);ctx.fill();ctx.fillText(tag,x+18,y)})
+}
+function allSignalCanvases(){return [...document.querySelectorAll('.wave-canvas')].map(c=>[c,'wave']).concat([...document.querySelectorAll('.monitor-canvas')].map(c=>[c,'monitor']),[...document.querySelectorAll('.agent-canvas')].map(c=>[c,'agent']))}
+function resizeAndDraw(){allSignalCanvases().forEach(([c,type])=>drawCanvas(c,type))}
+let lastSignalStep=0;
+function canvasLoop(ms){if(!lastSignalStep)lastSignalStep=ms;if(ms-lastSignalStep>500)lastSignalStep=ms-SIGNAL_STEP_MS;while(ms-lastSignalStep>=SIGNAL_STEP_MS){allSignalCanvases().forEach(([c,type])=>advanceCanvas(c,type));lastSignalStep+=SIGNAL_STEP_MS}resizeAndDraw();requestAnimationFrame(canvasLoop)}requestAnimationFrame(canvasLoop);
+
+/* Agent */
+const sampleData={
+ normal:{name:'正常运行',risk:'蓝色风险',color:'#7faeff',confidence:98.2,probs:[.4,.4,.3,.7,98.2],desc:'信号能量稳定，无持续异常峰值，设备状态与历史基线一致。',work:'FG-NORMAL-0286'},
+ construction:{name:'第三方施工',risk:'红色风险',color:'#ff858b',confidence:96.4,probs:[96.4,1.8,.9,.5,.4],desc:'检测到持续性冲击振动。位置位于燃气主干线12.43km处，当前区域无登记施工许可，建议立即现场核查。',work:'FG-20260804-0286'},
+ leakage:{name:'管道泄漏',risk:'红色风险',color:'#ff858b',confidence:94.8,probs:[1.2,94.8,1.4,1.3,1.3],desc:'检测到持续性中高频声纹与异常能量带，建议立即开展管道压力复核和现场检漏。',work:'FG-20260804-0287'},
+ deformation:{name:'结构微形变',risk:'橙色风险',color:'#ffc16f',confidence:92.7,probs:[1.4,1.3,92.7,2.1,2.5],desc:'检测到低频缓慢漂移与应变持续变化，建议对桥梁关键构件进行复测。',work:'FG-20260804-0288'},
+ temperature:{name:'异常温升',risk:'橙色风险',color:'#ffc16f',confidence:97.1,probs:[.5,.6,.7,97.1,1.1],desc:'温度序列持续上升并超过动态基线，建议核查隧道电气设施和通风状态。',work:'FG-20260804-0289'}
+};
+let selectedSample='construction';
+const labels=['第三方施工','管道泄漏','结构微形变','异常温升','正常运行'];
+function renderProbs(vals=[96.4,1.8,.9,.5,.4]){document.getElementById('probList').innerHTML=labels.map((l,i)=>'<div class="prob-row"><span>'+l+'</span><div class="bar"><i style="width:'+vals[i]+'%"></i></div><strong>'+vals[i].toFixed(1)+'%</strong></div>').join('')}
+renderProbs();
+document.querySelectorAll('.sample-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.sample-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');selectedSample=b.dataset.sample;showToast('已选择'+sampleData[selectedSample].name+'标准样本')}));
+const logTexts=['接收到监测数据','完成信号去噪与归一化','自动编码器完成异常检测','1D-CNN完成事件分类','规则引擎完成风险分级','生成巡检工单并同步GIS','事件报告已归档'];
+function renderLogs(active=0){document.getElementById('agentLogs').innerHTML=logTexts.map((x,i)=>'<div class="log-item"><span class="time">'+new Date(Date.now()-(logTexts.length-i)*900).toLocaleTimeString('zh-CN',{hour12:false})+'</span><span class="circle" style="opacity:'+(i<active?1:.18)+'"></span><span style="color:'+(i<active?'#c5e4f2':'#607f91')+'">'+x+'</span></div>').join('')}
+renderLogs(0);
+document.getElementById('runAgentBtn').addEventListener('click',()=>{
+ const btn=document.getElementById('runAgentBtn'),status=document.getElementById('agentRunStatus'),steps=[...document.querySelectorAll('#view-agent .flow-step')];btn.disabled=true;status.textContent='正在分析';steps.forEach(x=>x.classList.remove('active'));renderProbs([0,0,0,0,0]);renderLogs(0);
+ let i=0;const timer=setInterval(()=>{if(i<steps.length)steps[i].classList.add('active');renderLogs(Math.min(i+2,7));i++;if(i>steps.length){clearInterval(timer);const d=sampleData[selectedSample];renderProbs(d.probs);document.getElementById('agentResult').innerHTML='<div style="font-size:11px;color:'+d.color+'">● '+d.risk+'</div><h4>'+d.name+'</h4><p>'+d.desc+'</p><div style="font-size:10px;color:#b5d1df;margin-top:10px">工单 '+d.work+' · 推理耗时 '+(36+Math.random()*5).toFixed(1)+'ms</div>';status.textContent='分析完成';btn.disabled=false;showToast('智能分析与处置链路已完成')}} ,650)
+});
+
+/* 订阅 */
+function openPlan(mode){
+ const modal=document.getElementById('planModal'),type=document.getElementById('planType');
+ if(mode==='hardware')type.value='hardware';else if(mode==='security')type.value='private';else type.value='pro';
+ document.getElementById('planModalTitle').textContent=mode==='hardware'?'基础硬件建设方案':mode==='security'?'数据安全与增值方案':'SaaS订阅服务配置';
+ modal.classList.add('show');updateQuote()
+}
+function closePlan(){document.getElementById('planModal').classList.remove('show')}
+function getQuote(){
+ const type=document.getElementById('planType').value,km=Math.max(1,Number(document.getElementById('planKm').value||1)),dev=Math.max(1,Number(document.getElementById('planDevices').value||1));let service=3*km/100,label='SaaS基础版';
+ if(type==='pro'){service=8*km/100;label='SaaS专业版'}if(type==='ultimate'){service=20;label='SaaS旗舰版'}if(type==='private'){service=65;label='私有化部署'}if(type==='hardware'){service=0;label='基础硬件建设'}
+ return{type,km,dev,service,hardware:dev*35,label}
+}
+function updateQuote(){const q=getQuote();document.getElementById('quoteBox').textContent='当前选择：'+q.label+'；预计年度/部署服务费：'+q.service.toFixed(1)+'万元；硬件基础建设：'+q.hardware.toFixed(1)+'万元；监测里程：'+q.km+'公里。'}
+function submitLead(){showToast('方案需求已提交，客户经理将跟进配置清单');closePlan()}
+document.querySelectorAll('#planModal input,#planModal select').forEach(x=>x.addEventListener('input',updateQuote));
+window.openPlan=openPlan;window.closePlan=closePlan;window.updateQuote=updateQuote;window.submitLead=submitLead;
+
+/* 分析详情 */
+function openAnalysis(){document.getElementById('analysisModal').classList.add('show')}function closeAnalysis(){document.getElementById('analysisModal').classList.remove('show')}
+window.openAnalysis=openAnalysis;window.closeAnalysis=closeAnalysis;
+document.querySelectorAll('.modal-mask').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')}));
+</script>
+</body>
+</html>
