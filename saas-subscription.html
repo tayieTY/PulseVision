@@ -150,6 +150,29 @@ button{cursor:pointer}
 @media(max-width:1050px){.pricing-grid{grid-template-columns:1fr}.pulse-pricing-card.featured{transform:none}.pulse-pricing-card.featured:hover{transform:translateY(-8px)}.pulse-lead-panel{align-items:flex-start;flex-direction:column}}
 @media(max-width:900px){.app{grid-template-columns:82px 1fr}.sidebar{padding:17px 9px}.brand h1,.brand p,.nav .txt,.sidebar-card{display:none}.brand{justify-content:center;padding-left:0;padding-right:0}.nav button{justify-content:center}.content{padding:15px}.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.mini-metrics{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.app{display:block}.sidebar{display:none}.topbar{padding:0 13px}.top-actions .chip:first-child{display:none}.content{padding:11px}.kpis{grid-template-columns:repeat(2,1fr)}.device-grid,.report-grid,.feature-grid{grid-template-columns:1fr}.sample-row,.flow{grid-template-columns:repeat(2,1fr)}.agent-bottom,.form-grid{grid-template-columns:1fr}.hero-left h3{font-size:24px}}
+.pv-context{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:17px 20px;margin-bottom:17px;background:#0d2435;border:1px solid var(--line);border-radius:14px}
+.pv-context strong{display:block;font-size:18px;margin:7px 0}.pv-context small{font-size:11px;color:var(--muted)}
+.pv-context select,.pv-mobile-nav{max-width:250px;border:1px solid var(--line);border-radius:8px;padding:9px;background:#10283d;color:var(--text);font-size:12px}
+.pv-context[hidden]{display:none}.pv-mobile-nav{display:none}
+.unified-view .panel{background:linear-gradient(145deg,#0d2132,#0a1928);border-radius:12px;box-shadow:0 12px 36px #0002}.unified-view .panel:after{display:none}
+.pv-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:17px}
+.pv-stat{padding:18px 20px}.pv-stat>span{display:block;font-size:11px;color:var(--muted)}.pv-stat>strong{display:block;font-size:27px;font-weight:600;margin:12px 0;color:var(--text);font-variant-numeric:tabular-nums}.pv-stat b{font-weight:600}.pv-stat em{font-size:12px;color:#88a9bc;font-style:normal;margin-left:6px}.pv-stat small{font-size:10px;color:#799cae}
+.pv-panel{padding:20px;margin-bottom:17px;min-width:0}.pv-panel .panel-title h3{font-weight:600}.pv-panel .panel-title p{line-height:1.7}
+.pv-layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(310px,1fr);gap:17px;align-items:start}
+.pv-table-scroll{overflow:auto}.pv-table-scroll .data-table{min-width:570px}.pv-table-scroll .data-table td{padding:15px 9px;vertical-align:middle}.pv-cell-note{display:block;color:var(--muted);font-size:10px;margin-top:6px}
+.pv-color{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:7px}.pv-empty{font-size:12px;color:var(--muted);line-height:1.8;padding:26px 12px;text-align:center;border:1px dashed var(--line);border-radius:10px}
+.pv-evidence{padding:18px;border-radius:10px;background:#10283a;border:1px solid #28445a;margin-bottom:15px}.pv-evidence h4{font-size:21px;font-weight:500;margin:13px 0}.pv-evidence p{font-size:12px;color:#a7bfce;line-height:1.9}.pv-evidence small{display:block;color:#7899ac;font-size:10px;line-height:1.7;margin-top:12px}
+.pv-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:18px 0}.pv-flow>div{font-size:11px;color:#7390a5;padding:11px 8px;border:1px solid #223b50;border-radius:8px;white-space:nowrap}.pv-flow i{display:block;font-style:normal;font-size:9px;margin-bottom:7px}.pv-flow .done{color:#87e1b8;border-color:#305b56;background:#11302f}.pv-flow .active{color:#ffbd69;border-color:#6b5538;background:#2a271e}
+.pv-wave{height:220px;width:100%;background:#0b1522;border-radius:7px}.pv-spectrum{height:120px;width:100%;border-radius:7px}.pv-axis{display:flex;justify-content:space-between;font-size:10px;color:#6e8ca3;margin-top:7px}.pv-chart-caption{font-size:10px;color:#90acbd;margin:22px 0 10px}.pv-note{font-size:11px;color:#819fb2;line-height:1.9;margin:14px 0}
+.pv-facility{padding:10px 0 22px}.pv-facility>i{display:block;width:32px;height:3px;margin-bottom:17px}.pv-facility h4{font-size:20px;font-weight:500;margin:0 0 12px}.pv-facility p{font-size:12px;color:var(--muted)}.pv-facility>div{font-size:11px;color:#a5c3d3}
+.pv-scenes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}.pv-agent-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+.pv-logs>div{display:grid;grid-template-columns:62px 8px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--line);font-size:11px;line-height:1.8;color:#aac6d5}.pv-logs time{color:#7899ab;font-variant-numeric:tabular-nums}.pv-logs i{width:5px;height:5px;border-radius:50%;background:var(--cyan);margin-top:7px}
+.pv-device-grid,.pv-report-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;align-items:start}
+.pv-node-summary{padding:18px 0 23px;border-bottom:1px solid var(--line)}.pv-node-summary strong{display:block;font-size:25px;margin:17px 0 6px;font-weight:500}.pv-node-summary em{font-size:12px;font-style:normal;color:var(--muted)}.pv-node-summary small{font-size:11px;color:var(--muted)}
+.pv-node-links>div{padding:20px 0;border-bottom:1px solid var(--line)}.pv-node-links strong{font-size:12px;display:inline}.pv-node-links .badge{display:block;width:max-content;margin:10px 0}.pv-node-links>div>span:not(.badge){display:block;font-size:10px;color:var(--muted);margin-bottom:14px}.pv-node-links .small-btn{font-size:10px;padding:7px 10px}
+@media(max-width:1250px){.pv-layout{grid-template-columns:1fr}.pv-device-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pv-context{flex-wrap:wrap}}
+@media(max-width:750px){.pv-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.pv-device-grid,.pv-report-grid{grid-template-columns:1fr}.pv-context{padding:15px}.pv-context .signal-controls{width:100%}.pv-context select{flex:1;min-width:0}.pv-panel{padding:16px}.pv-flow{gap:5px}.pv-flow>div{font-size:10px;padding:8px 5px}.pv-wave{height:185px}}
+@media(max-width:620px){.pv-mobile-nav{display:block;max-width:135px;font-size:10px}.top-actions .chip:not(.clock){display:none}.topbar{height:auto;min-height:74px;gap:10px;padding:12px}.top-title{min-width:0}.top-title h2{font-size:17px}.top-title p{font-size:9px;max-width:185px;line-height:1.6}.top-actions{flex-direction:column;align-items:flex-end}.clock{font-size:8px;padding:4px;border:0}.pv-stat{padding:15px}.pv-stat>strong{font-size:22px}.pv-context strong{font-size:16px}}
 </style>
 </head>
 <body>
@@ -169,61 +192,20 @@ button{cursor:pointer}
       <button data-view="plans"><span class="ico">￥</span><span class="txt">订阅服务</span></button>
       <button data-view="reports"><span class="ico">▤</span><span class="txt">报表中心</span></button>
     </nav>
-    <div class="sidebar-card"><strong><span class="dot"></span>平台运行正常</strong><div>数据链路 8 / 8 在线</div><div>边缘推理节点在线</div></div>
+    <div class="sidebar-card"><strong><span class="dot"></span>长春场景演示</strong><div>6 项模拟资产 · 统一状态</div><div>非真实部署或实测数据</div></div>
   </aside>
 
   <main class="main">
     <header class="topbar">
       <div class="top-title"><h2 id="pageTitle">综合驾驶舱</h2><p id="pageSub">分布式光纤连续感知 · 多模态 AI 识别 · Agent 自动处置</p></div>
-      <div class="top-actions"><div class="chip">运行模式：<strong>标准样本</strong></div><div class="chip">节点：<strong>在线</strong></div><div class="chip clock" id="clock">--</div></div>
+      <div class="top-actions"><div class="chip">运行模式：<strong>场景模拟</strong></div><div class="chip">引擎：<strong>本地演示</strong></div><div class="chip clock" id="clock">--</div></div>
     </header>
     <section class="content">
 
       <!-- 1 综合驾驶舱 -->
-      <div class="view active" id="view-overview">
-        <div class="hero">
-          <section class="panel hero-left">
-            <div class="eyebrow">FiberGuard Intelligent Operations</div>
-            <h3>用一根光纤，构建城市生命线连续感知与智能处置闭环</h3>
-            <p>融合分布式光纤振动、温度、应变与声学信息，通过轻量级深度学习模型完成异常检测和事件识别，并由 FiberGuard Agent 自动执行风险分级、GIS 定位、工单生成与报告归档。</p>
-            <div class="hero-tags"><span>连续覆盖 25.0 km</span><span>1D-CNN 多模态识别</span><span>四级风险分级</span><span>Agent 自动闭环</span><span>边缘推理</span></div>
-          </section>
-          <section class="panel agent-card">
-            <div class="agent-head"><div><h4>FiberGuard Agent</h4><p>当前任务：燃气主干线 A 风险巡检</p></div><div class="agent-orb">◎</div></div>
-            <div class="agent-progress"><div style="display:flex;justify-content:space-between;font-size:11px"><span>本轮自动分析进度</span><strong id="overviewAgentProgress">68%</strong></div><div class="progress" style="margin-top:9px"><i id="overviewProgressBar" style="width:68%"></i></div><div style="display:flex;justify-content:space-between;margin-top:10px;font-size:9px;color:#7898aa"><span>FiberFusion-1D v1.2</span><span>规则引擎 R4.3</span></div></div>
-          </section>
-        </div>
+<div class="view active unified-view" id="view-overview"></div>
 
-        <div class="kpis">
-          <div class="panel kpi"><div class="kpi-name">在线监测距离<span class="up">●</span></div><div class="kpi-value"><span data-live="distance">25.00</span><small>km</small></div><div class="kpi-foot">8 条通道持续在线</div></div>
-          <div class="panel kpi"><div class="kpi-name">AI识别置信度<span class="up">↗</span></div><div class="kpi-value"><span data-live="confidence">96.72</span><small>%</small></div><div class="kpi-foot">多模态融合推理结果</div></div>
-          <div class="panel kpi"><div class="kpi-name">平均定位精度<span class="up">●</span></div><div class="kpi-value"><span data-live="accuracy">4.82</span><small>m</small></div><div class="kpi-foot">高风险事件空间定位</div></div>
-          <div class="panel kpi"><div class="kpi-name">本日处理事件<span class="up">+3</span></div><div class="kpi-value"><span data-live="events">1286</span><small>条</small></div><div class="kpi-foot">自动归档率 82.4%</div></div>
-          <div class="panel kpi"><div class="kpi-name">模型推理时延<span class="up">●</span></div><div class="kpi-value"><span data-live="latency">38.2</span><small>ms</small></div><div class="kpi-foot">边缘计算节点实时推理</div></div>
-          <div class="panel kpi"><div class="kpi-name">设备健康度<span class="up">↗</span></div><div class="kpi-value"><span data-live="health">97.36</span><small>%</small></div><div class="kpi-foot">解调仪与光纤链路综合</div></div>
-        </div>
-
-        <div class="main-grid">
-          <section class="panel city-launch">
-            <div class="panel-title"><div><h3>长春城市资产</h3><p>选择管段或桥梁，在 GIS 中查看位置、振动与处置记录</p></div><span class="badge blue">6 项示意资产</span></div>
-            <div class="city-asset-grid">
-              <button class="city-asset-button" onclick="openCityAsset('CC-W01')"><strong>人民大街 · 供水管网</strong><span>CC-W01 / 南关区场景</span></button>
-              <button class="city-asset-button" onclick="openCityAsset('CC-G02')"><strong>卫星路 · 燃气管网</strong><span>CC-G02 / 施工扰动演示</span></button>
-              <button class="city-asset-button" onclick="openCityAsset('CC-H03')"><strong>南湖大路 · 供热管网</strong><span>CC-H03 / 朝阳区场景</span></button>
-              <button class="city-asset-button" onclick="openCityAsset('CC-D04')"><strong>伊通河沿岸 · 排水管网</strong><span>CC-D04 / 沿河街区场景</span></button>
-              <button class="city-asset-button" onclick="openCityAsset('CC-B05')"><strong>长春大桥</strong><span>CC-B05 / 桥梁振动扩展场景</span></button>
-              <button class="city-asset-button" onclick="openCityAsset('CC-B06')"><strong>南湖大桥</strong><span>CC-B06 / 桥梁振动扩展场景</span></button>
-            </div>
-            <p class="city-launch-note">以南湖、人民大街与伊通河一带为背景，查看城市地下管网与桥梁的监测场景。城市形态、管线路径和监测数据均为模拟，不代表真实部署。</p>
-          </section>
-          <div class="side-stack">
-            <section class="panel city-guide"><div class="panel-title"><div><h3>长春场景操作</h3><p>在同一资产下查看信号与处置过程</p></div><span class="badge blue">交互演示</span></div><ol><li>选择管网或桥梁，进入 GIS 场景。</li><li>点击设施，查看振动幅度、主频和时频图。</li><li>触发施工扰动，人工复核后生成模拟工单。</li></ol><small>波形带有不规律冲击和背景噪声；幅度、主频及频谱来自同一组合成信号。</small></section>
-            <section class="panel alerts-panel"><div class="panel-title"><div><h3>实时风险预警</h3><p>AI识别 + Agent处置</p></div><span class="badge red">4条</span></div><div class="alert-list"><div class="alert red"><div class="alert-dot"></div><div><strong>第三方施工风险</strong><p>燃气主干线A · K12+430</p></div><div class="score dynamic-score" data-base="96.4">96.4%</div></div><div class="alert"><div class="alert-dot"></div><div><strong>异常温升趋势</strong><p>隧道监测D · K06+810</p></div><div class="score dynamic-score" data-base="87.2">87.2%</div></div><div class="alert blue"><div class="alert-dot"></div><div><strong>结构微形变</strong><p>桥梁监测C · S2墩</p></div><div class="score dynamic-score" data-base="82.8">82.8%</div></div></div></section>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2 GIS -->
+<!-- 2 GIS -->
       <div class="view" id="view-gis">
         <section class="panel city-integration">
           <div class="panel-title"><div><h3>长春城市管网与桥梁监测</h3><p>旋转、缩放或点选城市设施；右侧查看振动、候选事件与人工复核记录。</p></div><div class="signal-controls"><select id="cityAssetSelect" aria-label="选择长春监测资产"><option value="CC-G02">卫星路燃气管网</option><option value="CC-W01">人民大街供水管网</option><option value="CC-H03">南湖大路供热管网</option><option value="CC-D04">伊通河沿岸排水管网</option><option value="CC-B05">长春大桥</option><option value="CC-B06">南湖大桥</option></select><button class="small-btn" onclick="cityDataInfo()">数据说明</button><button class="small-btn" onclick="switchView('overview')">返回驾驶舱</button></div></div>
@@ -232,65 +214,12 @@ button{cursor:pointer}
         </section>
       </div>
 
-      <!-- 3 实时监测 -->
-      <div class="view" id="view-monitor">
-        <div class="mini-metrics">
-          <div class="panel mini"><span>当前通道</span><strong>CH-01</strong><p>燃气主干线A</p></div><div class="panel mini"><span>振动强度</span><strong><span data-live="vibration">31.6</span>dB</strong><p>连续时序采样</p></div><div class="panel mini"><span>温度</span><strong><span data-live="temperature">26.4</span>℃</strong><p>缓慢变化趋势</p></div><div class="panel mini"><span>应变</span><strong><span data-live="strain">0.126</span>mm</strong><p>处于正常范围</p></div>
-        </div>
-        <div class="monitor-grid">
-          <section class="panel chart-big"><div class="panel-title"><div><h3>实时信号时序曲线</h3><p>振动、温度、应变多物理量同步采样</p></div><div class="signal-controls"><button class="small-btn">30秒</button><button class="small-btn">5分钟</button><button class="primary-btn" onclick="showToast('当前监测片段已保存')">保存片段</button></div></div><canvas class="monitor-canvas" width="980" height="315"></canvas></section>
-          <section class="panel table-panel"><div class="panel-title"><div><h3>通道实时状态</h3><p>解调仪与光纤链路</p></div><span class="badge green">8/8在线</span></div><table class="data-table"><thead><tr><th>通道</th><th>对象</th><th>信号</th><th>状态</th></tr></thead><tbody><tr><td>CH-01</td><td>燃气A</td><td data-live="signal1">-18.6dB</td><td><span class="badge green">在线</span></td></tr><tr><td>CH-02</td><td>供水B</td><td data-live="signal2">-20.2dB</td><td><span class="badge green">在线</span></td></tr><tr><td>CH-03</td><td>桥梁C</td><td data-live="signal3">-19.4dB</td><td><span class="badge orange">关注</span></td></tr><tr><td>CH-04</td><td>隧道D</td><td data-live="signal4">-18.9dB</td><td><span class="badge green">在线</span></td></tr></tbody></table></section>
-        </div>
-      </div>
+      <div class="view unified-view" id="view-monitor"></div>
+<div class="view unified-view" id="view-alerts"></div>
+<div class="view unified-view" id="view-agent"></div>
+<div class="view unified-view" id="view-devices"></div>
 
-      <!-- 4 AI预警 -->
-      <div class="view" id="view-alerts">
-        <div class="mini-metrics">
-          <div class="panel mini"><span>今日预警</span><strong data-live="alertCount">28</strong><p>较昨日下降 7.3%</p></div><div class="panel mini"><span>红色预警</span><strong>1</strong><p>已进入处置流程</p></div><div class="panel mini"><span>平均置信度</span><strong><span data-live="alertConfidence">93.6</span>%</strong><p>多模型融合输出</p></div><div class="panel mini"><span>自动派单率</span><strong><span data-live="dispatch">82.4</span>%</strong><p>工单闭环持续提升</p></div>
-        </div>
-        <section class="panel table-panel">
-          <div class="panel-title"><div><h3>AI预警中心</h3><p>异常检测、事件分类、风险分级和处置建议</p></div><button class="primary-btn" onclick="showToast('当前预警已批量生成处置单')">批量派单</button></div>
-          <table class="data-table"><thead><tr><th>事件编号</th><th>事件类型</th><th>位置</th><th>置信度</th><th>等级</th><th>状态</th><th>操作</th></tr></thead><tbody>
-            <tr><td>EV-0826</td><td>第三方施工</td><td>燃气A · K12+430</td><td class="dynamic-score" data-base="96.4">96.4%</td><td><span class="badge red">红色</span></td><td>处理中</td><td><button class="small-btn" onclick="openAnalysis()">模型详情</button></td></tr>
-            <tr><td>EV-0825</td><td>异常温升</td><td>隧道D · K06+810</td><td class="dynamic-score" data-base="91.8">91.8%</td><td><span class="badge orange">橙色</span></td><td>已派单</td><td><button class="small-btn" onclick="showToast('已打开事件详情')">查看</button></td></tr>
-            <tr><td>EV-0824</td><td>结构微形变</td><td>桥梁C · S2墩</td><td class="dynamic-score" data-base="88.7">88.7%</td><td><span class="badge orange">黄色</span></td><td>复核中</td><td><button class="small-btn" onclick="showToast('样本已回写训练库')">回写</button></td></tr>
-            <tr><td>EV-0823</td><td>环境扰动</td><td>供水B · K18+220</td><td class="dynamic-score" data-base="76.2">76.2%</td><td><span class="badge blue">蓝色</span></td><td>已过滤</td><td><button class="small-btn" onclick="showToast('事件已归档')">归档</button></td></tr>
-          </tbody></table>
-        </section>
-        <div class="feature-grid" style="margin-top:17px"><section class="panel feature-card"><h4>多模态识别</h4><p>振动、声学、温度、应变与设备健康状态联合判断，降低单一信号误报。</p></section><section class="panel feature-card"><h4>风险规则融合</h4><p>结合设施类型、持续时间、历史事件和施工许可信息进行四级风险分级。</p></section><section class="panel feature-card"><h4>处置闭环</h4><p>预警生成后自动关联责任部门、响应时限、GIS点位和事件报告。</p></section></div>
-      </div>
-
-      <!-- 5 智能体中心 -->
-      <div class="view" id="view-agent">
-        <div class="mini-metrics"><div class="panel mini"><span>智能体状态</span><strong style="color:var(--green)">在线</strong><p>FiberGuard Agent</p></div><div class="panel mini"><span>模型版本</span><strong>v1.2</strong><p>1D-CNN + MLP</p></div><div class="panel mini"><span>已处理事件</span><strong data-live="agentEvents">1286</strong><p>自动执行任务</p></div><div class="panel mini"><span>自动闭环率</span><strong><span data-live="agentClosed">82.4</span>%</strong><p>工单和报告归档</p></div></div>
-        <div class="agent-layout">
-          <section class="panel agent-workbench">
-            <div class="panel-title"><div><h3>FiberGuard Agent 智能分析台</h3><p>选择标准样本并启动完整推理和处置链路</p></div><span class="badge green" id="agentRunStatus">待命</span></div>
-            <div class="sample-row"><button class="sample-btn" data-sample="normal">正常运行</button><button class="sample-btn active" data-sample="construction">第三方施工</button><button class="sample-btn" data-sample="leakage">管道泄漏</button><button class="sample-btn" data-sample="deformation">结构微形变</button><button class="sample-btn" data-sample="temperature">异常温升</button></div>
-            <canvas class="agent-canvas" width="900" height="190"></canvas>
-            <div class="flow"><div class="flow-step">数据接入</div><div class="flow-step">异常检测</div><div class="flow-step">事件分类</div><div class="flow-step">风险推理</div><div class="flow-step">工单闭环</div></div>
-            <div style="display:flex;justify-content:flex-end"><button class="primary-btn" id="runAgentBtn">开始智能识别</button></div>
-            <div class="agent-bottom">
-              <div class="probs" id="probList"></div>
-              <div class="result-card" id="agentResult"><div style="font-size:11px;color:#ff858b">● 红色风险</div><h4>第三方施工</h4><p>检测到持续性冲击振动。位置位于燃气主干线12.43km处，当前区域无登记施工许可，建议立即现场核查。</p><div style="font-size:10px;color:#b5d1df;margin-top:10px">工单 FG-20260804-0286 · 时限10分钟</div></div>
-            </div>
-          </section>
-          <section class="panel log-list"><div class="panel-title"><div><h3>自动执行日志</h3><p>Agent工具调用和业务动作</p></div></div><div id="agentLogs"></div></section>
-        </div>
-      </div>
-
-      <!-- 6 设备与光纤 -->
-      <div class="view" id="view-devices">
-        <div class="mini-metrics"><div class="panel mini"><span>解调仪</span><strong>4台</strong><p>3台在线 / 1台巡检</p></div><div class="panel mini"><span>光纤通道</span><strong><span data-live="channels">22</span>/24</strong><p>通道在线率91.7%</p></div><div class="panel mini"><span>覆盖里程</span><strong><span data-live="coverage">41.86</span>km</strong><p>燃气/供水/桥梁/隧道</p></div><div class="panel mini"><span>平均健康度</span><strong><span data-live="deviceHealth">94.2</span>%</strong><p>硬件运行状态</p></div></div>
-        <div class="device-grid">
-          <section class="panel device-card"><div class="device-head"><div><h4>1号分布式光纤解调仪</h4><p>DAS-GM-001 · 燃气主干线A</p></div><span class="badge green">在线</span></div><div class="device-values"><div><span>监测距离</span><strong data-live="d1dist">12.8km</strong></div><div><span>通道</span><strong>8/8</strong></div><div><span>机柜温度</span><strong data-live="d1temp">26.4℃</strong></div></div><div style="margin-top:14px"><div style="font-size:10px;color:#7898aa">健康度 97%</div><div class="progress" style="margin-top:7px"><span style="width:97%"></span></div></div></section>
-          <section class="panel device-card"><div class="device-head"><div><h4>2号分布式光纤解调仪</h4><p>DAS-GM-002 · 供水输送线B</p></div><span class="badge green">在线</span></div><div class="device-values"><div><span>监测距离</span><strong data-live="d2dist">10.6km</strong></div><div><span>通道</span><strong>6/6</strong></div><div><span>机柜温度</span><strong data-live="d2temp">25.8℃</strong></div></div><div style="margin-top:14px"><div style="font-size:10px;color:#7898aa">健康度 95%</div><div class="progress" style="margin-top:7px"><span style="width:95%"></span></div></div></section>
-          <section class="panel device-card"><div class="device-head"><div><h4>3号结构监测解调仪</h4><p>DAS-GM-003 · 桥梁监测C</p></div><span class="badge orange">巡检</span></div><div class="device-values"><div><span>监测距离</span><strong data-live="d3dist">8.4km</strong></div><div><span>通道</span><strong>4/6</strong></div><div><span>机柜温度</span><strong data-live="d3temp">27.1℃</strong></div></div><div style="margin-top:14px"><div style="font-size:10px;color:#7898aa">健康度 88%</div><div class="progress" style="margin-top:7px"><span style="width:88%;background:linear-gradient(90deg,var(--orange),var(--yellow))"></span></div></div></section>
-          <section class="panel device-card"><div class="device-head"><div><h4>4号温度监测解调仪</h4><p>DTS-GM-004 · 隧道监测D</p></div><span class="badge green">在线</span></div><div class="device-values"><div><span>监测距离</span><strong data-live="d4dist">10.1km</strong></div><div><span>通道</span><strong>4/4</strong></div><div><span>机柜温度</span><strong data-live="d4temp">26.0℃</strong></div></div><div style="margin-top:14px"><div style="font-size:10px;color:#7898aa">健康度 96%</div><div class="progress" style="margin-top:7px"><span style="width:96%"></span></div></div></section>
-        </div>
-      </div>
-
-      <!-- 7 订阅服务 -->
+<!-- 7 订阅服务 -->
       <div class="view" id="view-plans">
         <section class="panel pricing-shell">
           <div class="pricing-title"><h3>三级盈利生态</h3><p>基础硬件建设 + SaaS订阅服务 + 数据安全增值，形成标准化采购与持续服务闭环</p></div>
@@ -304,17 +233,7 @@ button{cursor:pointer}
       </div>
 
       <!-- 8 报表中心 -->
-      <div class="view" id="view-reports">
-        <div class="report-grid">
-          <section class="panel report-card"><h4>平台运行日报</h4><p>监测距离、设备状态、信号质量和事件统计汇总。</p><div class="num"><span data-live="reportEvents">1286</span> 条</div><button class="small-btn" onclick="showToast('运行日报已生成')">生成日报</button></section>
-          <section class="panel report-card"><h4>AI预警分析报告</h4><p>事件类型、风险等级、模型置信度与处置闭环统计。</p><div class="num"><span data-live="reportAccuracy">93.6</span>%</div><button class="small-btn" onclick="showToast('AI预警报告已生成')">查看报告</button></section>
-          <section class="panel report-card"><h4>设备健康报告</h4><p>解调仪、通道、机柜温度和硬件巡检状态汇总。</p><div class="num"><span data-live="reportHealth">94.2</span>%</div><button class="small-btn" onclick="showToast('设备健康报告已生成')">导出报告</button></section>
-          <section class="panel report-card"><h4>Agent事件报告</h4><p>记录智能体推理摘要、工具调用、工单生成和归档结果。</p><div class="num"><span data-live="closedLoop">82.4</span>%</div><button class="small-btn" onclick="openAnalysis()">打开详情</button></section>
-          <section class="panel report-card"><h4>订阅运营分析</h4><p>客户方案、版本选择、部署方式和服务费用测算。</p><div class="num">3 级</div><button class="small-btn" onclick="switchView('plans')">查看订阅</button></section>
-          <section class="panel report-card"><h4>风险趋势周报</h4><p>近7日风险变化、重点区域和模型识别趋势。</p><div class="num">-7.3%</div><button class="small-btn" onclick="showToast('风险趋势周报已生成')">生成周报</button></section>
-        </div>
-        <section class="panel table-panel" style="margin-top:17px"><div class="panel-title"><div><h3>最近生成的报告</h3><p>平台、设备、模型和工单报告统一归档</p></div><button class="primary-btn" onclick="showToast('已打包当前全部报告')">打包导出</button></div><table class="data-table"><thead><tr><th>报告编号</th><th>报告名称</th><th>生成时间</th><th>状态</th></tr></thead><tbody><tr><td>RP-20260804-91</td><td>城市生命线平台运行日报</td><td>20:30:00</td><td><span class="badge green">已生成</span></td></tr><tr><td>RP-20260804-90</td><td>第三方施工事件分析报告</td><td>20:18:06</td><td><span class="badge green">已归档</span></td></tr><tr><td>RP-20260804-89</td><td>设备与光纤健康报告</td><td>19:50:00</td><td><span class="badge green">已生成</span></td></tr></tbody></table></section>
-      </div>
+<div class="view unified-view" id="view-reports"></div>
     </section>
   </main>
 </div>
@@ -337,238 +256,177 @@ button{cursor:pointer}
   </div>
 </div>
 
-<!-- 模型详情 -->
-<div class="modal-mask" id="analysisModal">
-  <div class="modal">
-    <div class="modal-head"><div><h3>模型推理详情</h3><p>FiberFusion-1D 多模态事件识别结果</p></div><button class="small-btn" onclick="closeAnalysis()">关闭</button></div>
-    <div class="mini-metrics" style="grid-template-columns:repeat(4,1fr)"><div class="panel mini"><span>识别事件</span><strong style="font-size:17px">第三方施工</strong><p>燃气主干线A</p></div><div class="panel mini"><span>置信度</span><strong>96.4%</strong><p>五分类输出</p></div><div class="panel mini"><span>异常分数</span><strong>0.872</strong><p>自动编码器</p></div><div class="panel mini"><span>推理耗时</span><strong>38.2ms</strong><p>边缘节点</p></div></div>
-    <div class="quote-box">检测到持续性冲击振动；事件位置位于燃气主干线12.43公里处；当前区域无登记施工许可；异常持续时间达到18秒；综合判断为第三方施工高风险事件。</div>
-  </div>
-</div>
 <div class="toast" id="toast"></div>
 
 <script>
-const viewMeta={
- overview:['综合驾驶舱','分布式光纤连续感知 · 多模态 AI 识别 · Agent 自动处置'],
- gis:['GIS 数字孪生','管线、设备、风险点位与工单状态统一映射'],
- monitor:['实时监测','振动、温度、应变与声学数据连续采集'],
- alerts:['AI 预警中心','异常检测、事件分类、风险分级与处置建议'],
- agent:['智能体中心','FiberGuard Agent 推理、决策与自动执行'],
- devices:['设备与光纤','解调仪、通道、光纤路由和设备健康度管理'],
- plans:['订阅服务','基础硬件建设、SaaS订阅和数据安全增值'],
- reports:['报表中心','平台运行、模型分析、设备健康和事件报告']
-};
-let currentView='overview';
-function switchView(id){
- currentView=id;
- document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+id));
- document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));
- document.getElementById('pageTitle').textContent=viewMeta[id][0];
- document.getElementById('pageSub').textContent=viewMeta[id][1];
- if(id==='gis')ensureCityFrame();
- syncCityPlayback();
- window.scrollTo({top:0,behavior:'smooth'});
- setTimeout(()=>resizeAndDraw(),80);
-}
-document.querySelectorAll('#nav button').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.view)));
-
-function tickClock(){document.getElementById('clock').textContent=new Date().toLocaleString('zh-CN',{hour12:false})}
-tickClock();setInterval(tickClock,1000);
-
-function showToast(text){const t=document.getElementById('toast');t.textContent=text;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),1700)}
-window.showToast=showToast;window.switchView=switchView;
-
-/* 本页复用已经发布的城市模型；只在嵌入文档内隐藏重复导航。 */
-let cityReady=false,pendingCityAsset='CC-G02';
-const cityFrame=document.getElementById('cityFrame');
+const $=id=>document.getElementById(id);
+const viewMeta={overview:['综合驾驶舱','长春城市资产 · 统一信号 · 人工复核与工单'],gis:['GIS 数字孪生','长春管网与桥梁 · 点选设施联动各业务模块'],monitor:['实时监测','当前设施的同一组振动信号、幅度和频谱'],alerts:['AI 预警中心','候选事件汇总 · 证据查看 · 人工复核'],agent:['智能体中心','当前事件分析辅助 · 人工确认后生成工单'],devices:['设备与光纤','长春资产与模拟接入关系 · 不代表真实安装'],plans:['订阅服务','基础硬件建设、SaaS订阅和数据安全增值'],reports:['报表中心','本轮长春场景演示记录 · 事件和工单导出']};
+let currentView='overview',cityReady=false,pendingCityAsset='CC-G02',api=null,snapshot=null,signature='',analysisBusy=false;
+const activity=[],cityFrame=$('cityFrame');
+const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const selected=()=>snapshot?.assets.find(a=>a.id===snapshot.selectedId);
+const km=a=>a.length.toFixed(2)+' km';
+const chainage=a=>a.event?'K'+Math.floor(a.event.chainage/1000)+'+'+String(a.event.chainage%1000).padStart(3,'0'):'—';
+const statusBadge=a=>`<span class="badge ${a.status==='warning'?'orange':a.status==='ordered'?'blue':'green'}">${esc(a.statusText)}</span>`;
+const button=(action,label,id='',extra='')=>`<button class="small-btn" data-pv-action="${action}" data-id="${esc(id)}" ${extra}>${label}</button>`;
+const stat=(label,value,note)=>`<div class="panel pv-stat"><span>${label}</span><strong>${value}</strong><small>${note}</small></div>`;
+const panel=(title,sub,content,action='')=>`<section class="panel pv-panel"><div class="panel-title"><div><h3>${title}</h3><p>${sub}</p></div>${action}</div>${content}</section>`;
+const empty=label=>`<div class="pv-empty">${label}</div>`;
+function log(text){activity.unshift({at:new Date().toLocaleTimeString('zh-CN',{hour12:false}),text});if(activity.length>30)activity.pop();}
+function showToast(text){const el=$('toast');el.textContent=text;el.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.remove('show'),1800);}
 function ensureCityFrame(){if(!cityFrame.getAttribute('src'))cityFrame.src=cityFrame.dataset.src;}
-function selectCityAsset(id){
- pendingCityAsset=id;document.getElementById('cityAssetSelect').value=id;
- if(cityReady)cityFrame.contentDocument.querySelector('.asset-item[data-id="'+id+'"]')?.click();
+function switchView(id){
+ if(!viewMeta[id])return;currentView=id;
+ document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+id));
+ document.querySelectorAll('#nav button').forEach(b=>{b.classList.toggle('active',b.dataset.view===id);b.setAttribute('aria-current',b.dataset.view===id?'page':'false');});
+ $('pageTitle').textContent=viewMeta[id][0];$('pageSub').textContent=viewMeta[id][1];
+ $('platformContext').hidden=id==='plans';$('mobileView').value=id;
+ api?.setVisible(id==='gis');if(snapshot)renderSignal(snapshot.signal);
+ window.scrollTo({top:0,behavior:'auto'});
 }
+function selectCityAsset(id){pendingCityAsset=id;api?.select(id);refresh();}
 function openCityAsset(id){selectCityAsset(id);switchView('gis');}
-function syncCityPlayback(){
- if(!cityReady)return;
- const pause=cityFrame.contentDocument.getElementById('pause');
- const shouldPause=currentView!=='gis';
- if(pause&&(pause.getAttribute('aria-pressed')==='true')!==shouldPause)pause.click();
+function cityDataInfo(){if(cityReady){switchView('gis');cityFrame.contentDocument.getElementById('sources-btn').click();}else showToast('城市场景正在加载');}
+window.switchView=switchView;window.showToast=showToast;window.openCityAsset=openCityAsset;window.cityDataInfo=cityDataInfo;
+document.querySelectorAll('#nav button').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.view)));
+const context=document.createElement('section');context.id='platformContext';context.className='pv-context';
+context.innerHTML='<div><span class="eyebrow">CHANGCHUN / SHARED WORKSPACE</span><strong id="contextName">正在连接长春场景…</strong><small id="contextLocation">所有模块使用同一组资产、信号与工单</small></div><div class="signal-controls"><select id="globalAsset" aria-label="当前监测设施"></select><span id="contextStatus"></span>'+button('map','地图定位')+'</div>';
+document.querySelector('.content').prepend(context);
+const mobile=document.createElement('select');mobile.id='mobileView';mobile.className='pv-mobile-nav';mobile.setAttribute('aria-label','切换平台模块');mobile.innerHTML=Object.entries(viewMeta).map(([id,meta])=>`<option value="${id}">${meta[0]}</option>`).join('');document.querySelector('.top-actions').prepend(mobile);
+mobile.addEventListener('change',e=>switchView(e.target.value));
+$('globalAsset').addEventListener('change',e=>selectCityAsset(e.target.value));
+$('cityAssetSelect').addEventListener('change',e=>selectCityAsset(e.target.value));
+function tickClock(){$('clock').textContent=new Date().toLocaleString('zh-CN',{hour12:false});}tickClock();setInterval(tickClock,1000);
+function readouts(){return `<div class="pv-stats">${stat('当前资产',esc(selected().id),'与地图选择同步')}${stat('振动幅度 · RMS','<b data-reading="rms">—</b><em>a.u.</em>','最近 1 s · 归一化幅度')}${stat('主频','<b data-reading="frequency">—</b><em>Hz</em>','最近 2 s · 弱背景不报告谱峰')}${stat('信号状态','<b data-reading="playback">—</b>','256 Hz · 合成信号')}</div>`;}
+function assetRows(){return snapshot.assets.map(a=>`<tr><td><i class="pv-color" style="background:${a.color}"></i>${esc(a.id)}</td><td>${esc(a.name)}</td><td>${esc(a.typeName)}</td><td>${km(a)}</td><td>${statusBadge(a)}</td><td>${button('select','查看',a.id)} ${button('locate','定位',a.id)}</td></tr>`).join('');}
+function assetTable(){return `<div class="pv-table-scroll"><table class="data-table"><thead><tr><th>资产编号</th><th>长春设施</th><th>类型</th><th>示意长度</th><th>事件状态</th><th>操作</th></tr></thead><tbody>${assetRows()}</tbody></table></div>`;}
+function workflow(a){const stage=a.status==='closed'?4:a.status==='ordered'?3:a.status==='reviewed'?2:a.event?1:0;return `<div class="pv-flow">${['光纤感知','候选事件','人工复核','模拟工单'].map((name,i)=>`<div class="${i<stage?'done':i===stage?'active':''}"><i>0${i+1}</i>${name}</div>`).join('')}</div>`;}
+function evidence(a){return `<div class="pv-evidence"><span class="eyebrow">${esc(a.id)} / ${chainage(a)}</span><h4>${esc(a.event?.name||'正常背景')}</h4><p>${esc(a.event?.description||'当前为背景振动，可触发施工、车辆或未知扰动场景。')}</p>${a.extension?'<p>桥梁仅展示振动观测，不作结构病害诊断。</p>':''}<div class="signal-controls">${button('review','人工复核','',a.status==='warning'?'':'disabled')}${button('order','生成模拟工单','',a.status==='reviewed'?'':'disabled')}${button('map','查看地图证据')}</div><small>候选类别来自演示场景选择，不是实测模型识别结论。</small></div>`;}
+function orderTable(){return snapshot.orders.length?`<div class="pv-table-scroll"><table class="data-table"><thead><tr><th>工单编号</th><th>关联设施</th><th>事件</th><th>状态</th><th>操作</th></tr></thead><tbody>${snapshot.orders.slice().reverse().map(o=>`<tr><td>${esc(o.id)}</td><td>${esc(o.assetName)}</td><td>${esc(o.eventName)}</td><td><span class="badge ${o.complete?'green':'blue'}">${o.complete?'已闭环':'模拟待处理'}</span></td><td>${o.complete?esc(o.closedAt):button('close','现场确认并关闭',o.id)}</td></tr>`).join('')}</tbody></table></div>`:empty('本轮暂无工单。候选事件须经人工复核后才能创建。');}
+function renderOverview(){
+ const candidates=snapshot.assets.filter(a=>['warning','reviewed','ordered'].includes(a.status)),lines=snapshot.assets.filter(a=>!a.extension),closed=snapshot.orders.filter(o=>o.complete).length;
+ $('view-overview').innerHTML=`<div class="pv-stats">${stat('城市示意资产','6<em>项</em>','4 类管网 · 2 座桥梁')}${stat('管网示意里程',lines.reduce((n,a)=>n+a.length,0).toFixed(1)+'<em>km</em>','与地图路线统计一致')}${stat('待跟进候选',candidates.length+'<em>项</em>','待复核 / 已复核 / 工单处理中')}${stat('模拟工单',snapshot.orders.length+'<em>单</em>','已闭环 '+closed+' 单')}</div><div class="pv-layout">${panel('长春城市资产','从资产进入地图或实时监测，所选设施在所有模块中保持一致',assetTable(),button('map','打开城市地图'))}${panel('当前事件与处置','本轮场景状态，而非独立编造的运营统计',evidence(selected())+workflow(selected()))}</div>${panel('本轮工单','地图、预警与报表共用同一处置记录',orderTable())}`;
 }
-function cityDataInfo(){
- if(cityReady)cityFrame.contentDocument.getElementById('sources-btn').click();
- else showToast('城市场景正在加载，请稍候');
+function renderMonitor(){
+ const a=selected();$('view-monitor').innerHTML=readouts()+`<div class="pv-layout">${panel('光纤振动信号','最近 8 s · 与 GIS 使用相同采样流，冲击强弱与间隔不固定','<canvas class="pv-wave" data-chart="wave" aria-label="当前设施合成振动波形"></canvas><div class="pv-axis"><span>−8 s</span><span>−4 s</span><span>现在</span></div><div class="pv-chart-caption">STFT / 0–100 Hz · 固定对数功率色阶</div><canvas class="pv-spectrum" data-chart="spectrum" aria-label="同一波形的时频图"></canvas>',button('pause',snapshot.paused?'继续信号':'暂停信号')+' '+button('fragment','保存模拟片段'))}${panel('当前设施','资产、状态和证据与地图联动',`<div class="pv-facility"><i style="background:${a.color}"></i><h4>${esc(a.name)}</h4><p>${esc(a.location)}</p><div>${esc(a.typeName)} · ${km(a)} · ${statusBadge(a)}</div></div>`+evidence(a))}</div>${panel('监测资产与通道','每项资产对应一个演示通道；其他设施的信号可点选查看',assetTable())}<div class="pv-note">当前演示仅展示 DAS 振动信号。温度、应变及真实设备遥测尚未接入；不把归一化幅度标成 dB、毫米或应变实测值。</div>`;
 }
+function renderAlerts(){
+ const events=snapshot.assets.filter(a=>a.event),waiting=events.filter(a=>a.status==='warning'),open=snapshot.orders.filter(o=>!o.complete);
+ const rows=events.map(a=>`<tr><td>EV-${esc(a.id)}</td><td>${esc(a.event.name)}</td><td>${esc(a.name)}<small class="pv-cell-note">${chainage(a)} · ${esc(a.event.at)}</small></td><td>${statusBadge(a)}</td><td>${button('analyse','查看证据',a.id)} ${button('locate','地图定位',a.id)}</td></tr>`).join('');
+ $('view-alerts').innerHTML=`<div class="pv-stats">${stat('本轮事件',events.length+'<em>项</em>','每个设施保留最新场景事件')}${stat('等待人工复核',waiting.length+'<em>项</em>','不自动认定事故')}${stat('待处理工单',open.length+'<em>单</em>','复核后创建，与地图一致')}${stat('实测模型置信度','未接入','不展示编造的概率或识别率')}</div>${panel('长春设施候选事件','点击证据切换到同一设施；车辆通行作为背景记录，不自动派单',rows?`<div class="pv-table-scroll"><table class="data-table"><thead><tr><th>事件标识</th><th>候选类型</th><th>设施与位置</th><th>处置状态</th><th>操作</th></tr></thead><tbody>${rows}</tbody></table></div>`:empty('暂无候选事件。请在地图或分析台触发一次演示场景。'))}<div class="pv-layout">${panel('当前候选证据','同一设施、同一信号、同一人工复核入口',evidence(selected())+workflow(selected()))}${panel('模拟处置记录','工单关闭后，地图与这里同时更新',orderTable())}</div>`;
+}
+function renderAgent(){
+ const a=selected();$('view-agent').innerHTML=readouts()+`<div class="pv-layout">${panel('FiberGuard 事件分析台','对当前设施查看信号特征与处置建议；不宣称已运行真实分类模型',`<div class="pv-scenes">${button('inject','施工扰动','construction')}${button('inject','车辆通行','traffic')}${button('inject','未知振动','unknown')}</div><canvas class="pv-wave" data-chart="wave" aria-label="当前事件振动信号"></canvas><div class="pv-axis"><span>−8 s</span><span>−4 s</span><span>现在</span></div><div class="pv-agent-actions">${button('analysis','分析当前信号','',analysisBusy?'disabled':'')}${button('map','在地图中查看')}</div>${workflow(a)}<div id="analysisProgress" class="pv-note">分析依据为当前合成波形、RMS、频谱和演示类别；人工复核不被自动跳过。</div>`+evidence(a))}${panel('实际操作日志','记录本轮操作，未发送外部工单、未调用真实模型服务',`<div class="pv-logs">${activity.length?activity.map(item=>`<div><time>${esc(item.at)}</time><i></i><span>${esc(item.text)}</span></div>`).join(''):empty('选择设施或触发场景后，操作记录显示在这里。')}</div>`)}</div>`;
+}
+function renderDevices(){
+ const groups=[{id:'SIM-N01',name:'城区管网接入节点',ids:['CC-W01','CC-H03']},{id:'SIM-N02',name:'南部管网接入节点',ids:['CC-G02','CC-D04']},{id:'SIM-N03',name:'桥梁振动接入节点',ids:['CC-B05','CC-B06']}];
+ const cards=groups.map(g=>{const assets=g.ids.map(id=>snapshot.assets.find(a=>a.id===id));return panel(g.name,g.id+' / 演示接入关系',`<div class="pv-node-summary"><span class="badge blue">模拟节点</span><strong>${assets.reduce((n,a)=>n+a.length,0).toFixed(2)}<em> km</em><small>${assets.length} 个演示通道</small></div><div class="pv-node-links">${assets.map(a=>`<div><i class="pv-color" style="background:${a.color}"></i><strong>${esc(a.name)}</strong>${statusBadge(a)}<span>${esc(a.id)} · ${km(a)}</span><div>${button('monitor','查看信号',a.id)} ${button('locate','地图定位',a.id)}</div></div>`).join('')}</div>`);}).join('');
+ $('view-devices').innerHTML=`<div class="pv-stats">${stat('模拟接入节点','3<em>个</em>','管网两组 · 桥梁一组')}${stat('演示通道','6<em>路</em>','与地图 6 项资产逐一对应')}${stat('管网示意里程',snapshot.assets.filter(a=>!a.extension).reduce((n,a)=>n+a.length,0).toFixed(1)+'<em>km</em>','桥梁扩展场景单独展示')}${stat('真实设备遥测','未接入','机柜温度、健康度不作虚构展示')}</div><div class="pv-device-grid">${cards}</div>${panel('资产 — 光纤 — 通道对应','接入分组为演示配置，不代表已安装的解调仪或现场部署',assetTable())}<div class="pv-note">工程接入后应以设备序列号、实测光纤里程、通道标定及现场耦合条件替换此处的模拟对应关系。</div>`;
+}
+function renderReports(){
+ const events=snapshot.assets.filter(a=>a.event).length,closed=snapshot.orders.filter(o=>o.complete).length;
+ $('view-reports').innerHTML=`<div class="pv-stats">${stat('本轮事件',events+'<em>项</em>','从当前资产事件读取')}${stat('模拟工单',snapshot.orders.length+'<em>单</em>','与地图处置记录一致')}${stat('已闭环',closed+'<em>单</em>','由模拟现场确认产生')}${stat('报告性质','演示记录','不是客户验收或实测性能报告')}</div><div class="pv-report-grid">${panel('长春场景运行记录','资产、事件、工单及模拟数据声明',`<p class="pv-note">导出本轮完整 JSON 记录，保留设施关联和复核状态。</p>`+button('export','导出本轮记录'))}${panel('当前信号片段','当前设施最近 8 s 合成采样',`<p class="pv-note">包含 256 Hz 采样、RMS、主频及归一化单位。</p>`+button('fragment','导出模拟信号'))}${panel('订阅服务配置','保留原有价格及方案配置',`<p class="pv-note">硬件建设、SaaS 订阅及数据安全增值。</p>`+button('plans','查看订阅方案'))}</div>${panel('本轮模拟工单','未发送外部单位；所有记录由当前演示操作生成',orderTable())}`;
+}
+function renderAll(){
+ const a=selected();$('contextName').textContent=a.name;$('contextLocation').textContent=a.location+' · '+a.typeName+' · '+km(a);$('contextStatus').innerHTML=statusBadge(a);
+ const options=snapshot.assets.map(a=>`<option value="${a.id}">${esc(a.name)}</option>`).join('');
+ for(const select of [$('globalAsset'),$('cityAssetSelect')]){select.innerHTML=options;select.value=a.id;}
+ renderOverview();renderMonitor();renderAlerts();renderAgent();renderDevices();renderReports();renderSignal(snapshot.signal);
+}
+function refresh(){
+ if(!api)return;snapshot=api.snapshot();pendingCityAsset=snapshot.selectedId;
+ const next=JSON.stringify([snapshot.selectedId,snapshot.paused,snapshot.assets.map(a=>[a.id,a.status,a.event?.kind,a.event?.at,a.event?.signalStart]),snapshot.orders,activity]);
+ if(next!==signature){signature=next;renderAll();}else renderSignal(snapshot.signal);
+}
+function canvasContext(canvas){
+ const r=Math.min(devicePixelRatio||1,2),w=Math.max(1,canvas.clientWidth),h=canvas.clientHeight;
+ if(!h||w<2)return null;if(canvas.width!==Math.round(w*r)||canvas.height!==Math.round(h*r)){canvas.width=Math.round(w*r);canvas.height=Math.round(h*r);}
+ const ctx=canvas.getContext('2d');ctx.setTransform(r,0,0,r,0,0);return{ctx,w,h};
+}
+function renderSignal(signal){
+ if(!signal)return;
+ document.querySelectorAll('[data-reading="rms"]').forEach(el=>el.textContent=signal.rms.toFixed(3));
+ document.querySelectorAll('[data-reading="frequency"]').forEach(el=>el.textContent=signal.dominantHz===null?'—':signal.dominantHz.toFixed(1));
+ document.querySelectorAll('[data-reading="playback"]').forEach(el=>el.textContent=snapshot.paused?'已暂停':'模拟运行');
+ document.querySelectorAll('canvas[data-chart]').forEach(canvas=>{
+  const c=canvasContext(canvas);if(!c)return;const{ctx,w,h}=c;ctx.fillStyle='#0b1522';ctx.fillRect(0,0,w,h);
+  if(canvas.dataset.chart==='spectrum'){
+   for(const column of signal.columns)for(let y=0;y<h;y+=2){const bin=Math.max(1,Math.min(100,Math.round((1-y/h)*100))),db=10*Math.log10(column.power[bin]+1e-12),p=Math.max(0,Math.min(1,(db+65)/55));ctx.fillStyle=`hsl(${241-p*190},${58+p*28}%,${9+p*47}%)`;ctx.fillRect(column.position*w,y,w/64+1,2);}return;
+  }
+  ctx.strokeStyle='#203148';ctx.lineWidth=.6;for(let y=1;y<4;y++){ctx.beginPath();ctx.moveTo(0,y*h/4);ctx.lineTo(w,y*h/4);ctx.stroke();}for(let x=1;x<8;x++){ctx.beginPath();ctx.moveTo(w*x/8,0);ctx.lineTo(w*x/8,h);ctx.stroke();}
+  ctx.beginPath();for(let x=0;x<Math.floor(w);x++){const begin=Math.floor(x/w*signal.values.length),end=Math.max(begin+1,Math.floor((x+1)/w*signal.values.length));let low=Infinity,high=-Infinity;for(let i=begin;i<end;i++){low=Math.min(low,signal.values[i]);high=Math.max(high,signal.values[i]);}const top=Math.max(3,Math.min(h-3,h/2-high*h*.34)),bottom=Math.max(3,Math.min(h-3,h/2-low*h*.34));ctx.moveTo(x+.5,top);ctx.lineTo(x+.5,Math.max(top+.7,bottom));}ctx.strokeStyle=selected().status==='warning'?'#ffbd69':'#68dce9';ctx.lineWidth=1;ctx.stroke();
+ });
+}
+function download(value,name){const uri=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=uri;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(uri),2000);}
+function exportRecord(fragment=false){
+ if(!snapshot)return;const a=selected(),base={title:'光脉智瞳长春场景模拟记录',simulated:true,exportedAt:new Date().toISOString(),notice:'所有资产、路径、信号和工单均为模拟，不代表真实部署或实测性能。'};
+ if(fragment)download({...base,assetId:a.id,assetName:a.name,sampleRateHz:256,windowSeconds:8,amplitudeUnit:'a.u. (uncalibrated)',rms:snapshot.signal.rms,dominantHz:snapshot.signal.dominantHz,values:Array.from(snapshot.signal.values)},'光脉智瞳-长春模拟信号.json');
+ else download({...base,selectedId:snapshot.selectedId,assets:snapshot.assets,orders:snapshot.orders,activity},'光脉智瞳-长春本轮记录.json');
+ log(fragment?'导出当前设施合成信号片段':'导出本轮资产、事件与工单记录');refresh();
+}
+document.addEventListener('click',e=>{
+ const target=e.target.closest('[data-pv-action]');if(!target||target.disabled)return;const action=target.dataset.pvAction,id=target.dataset.id;
+ if(!api){showToast('正在连接长春场景，请稍候');return;}
+ if(['select','monitor','analyse','locate'].includes(action)){api.select(id);log('查看 '+api.snapshot().assets.find(a=>a.id===id).name);refresh();if(action==='monitor'||action==='select')switchView('monitor');if(action==='analyse')switchView('agent');if(action==='locate')switchView('gis');return;}
+ if(action==='map')return switchView('gis');if(action==='plans')return switchView('plans');
+ if(action==='fragment'||action==='export')return exportRecord(action==='fragment');
+ if(action==='inject'){api.inject(id);log('触发 '+({construction:'施工扰动',traffic:'车辆通行',unknown:'未知振动'}[id])+' / '+selected().name);}
+ if(action==='review'){api.review();log('人工复核 '+selected().name);}
+ if(action==='order'){api.createOrder();log('创建模拟工单 / '+selected().name);}
+ if(action==='close'){api.closeOrder(id);log('模拟现场确认并关闭 '+id);}
+ if(action==='pause')api.pause();
+ if(action==='analysis'){
+  if(analysisBusy)return;analysisBusy=true;target.disabled=true;log('读取 '+selected().name+' 当前合成波形与频谱');
+  const result=$('analysisProgress');result.textContent='正在读取同一信号窗口…';
+  setTimeout(()=>{analysisBusy=false;log('信号特征已读取；候选类别仅供演示，处置仍需人工复核');refresh();$('analysisProgress').textContent='已读取当前 RMS 与频谱。请结合候选证据人工复核，不自动跳到工单闭环。';},650);
+ }
+ refresh();
+});
 cityFrame.addEventListener('load',()=>{
  const doc=cityFrame.contentDocument;if(!doc?.getElementById('viewport'))return;
- const style=doc.createElement('style');
- style.textContent=`
-   html,body{margin:0;background:#0b1522;overflow-x:hidden}
-   .topbar,.bottom-bar,.sidebar{display:none!important}
-   .workspace{height:100vh;min-height:0;padding:0;gap:12px;grid-template-columns:minmax(0,1fr) 318px}
-   .map-panel{height:100%;min-height:0}.viewport{min-height:350px}
-   .inspector{height:100%;min-height:0;overflow-y:auto;padding:18px 15px;scrollbar-width:thin;scrollbar-color:#33546e #0b1522}
-   .inspector>section,.inspector>.reading-grid,.inspector>.detail-head,.inspector>.detail-meta,.inspector>.review-actions{flex-shrink:0}
-   .chart-section canvas#waveform{height:102px}.chart-section canvas#spectrogram{height:66px}
-   .demo-console{padding:15px 16px}.map-foot span:first-child{display:none}
-   #sources-dialog{max-height:80vh;overflow:auto}
-   @media(max-width:900px){
-     .workspace{display:flex;flex-direction:column;height:auto;min-height:0;gap:12px}
-     .map-panel{height:660px;min-height:660px}.viewport{min-height:400px}
-     .inspector{display:flex;grid-column:auto;height:auto;overflow:visible;gap:0;padding:20px}
-     .chart-section{margin-top:19px}.chart-section:nth-of-type(2){margin-top:19px}
-     .reading-grid,.review-actions{width:100%}.inspector-note{margin-top:12px}
-   }`;
- doc.head.appendChild(style);cityReady=true;
- selectCityAsset(pendingCityAsset);syncCityPlayback();
- new MutationObserver(()=>{
-   const id=doc.getElementById('detail-id').textContent.match(/CC-[A-Z]\d{2}/)?.[0];
-   if(id){pendingCityAsset=id;document.getElementById('cityAssetSelect').value=id;}
- }).observe(doc.getElementById('detail-id'),{childList:true,subtree:true,characterData:true});
-});
-document.getElementById('cityAssetSelect').addEventListener('change',e=>selectCityAsset(e.target.value));
-window.openCityAsset=openCityAsset;window.cityDataInfo=cityDataInfo;
-
-/* 多周期慢变化：主周期约5分钟，辅助周期7-13分钟 */
-const liveConfigs={
- distance:[25,.06,2,[307,431,593],.2],confidence:[96.72,.42,2,[283,419,647],1.1],accuracy:[4.82,.14,2,[331,467,719],2.2],
- events:[1286,6.2,0,[353,509,809],.8],latency:[38.2,2.6,1,[317,487,661],2.9],health:[97.36,.31,2,[367,523,787],1.7],
- points:[42,.65,0,[389,541,823],.4],risks:[4,.3,0,[421,601,877],1.4],refresh:[1.2,.08,1,[347,503,739],.7],
- vibration:[31.6,2.1,1,[311,457,683],1.2],temperature:[26.4,.35,1,[337,491,751],2.1],strain:[.126,.008,3,[373,557,811],.2],
- alertCount:[28,1.1,0,[359,521,787],1.4],alertConfidence:[93.6,.36,1,[313,479,701],2.3],dispatch:[82.4,.7,1,[401,557,829],.45],
- agentEvents:[1286,5.5,0,[353,509,809],.8],agentClosed:[82.4,.7,1,[401,557,829],.45],channels:[22,.35,0,[431,619,887],1],
- coverage:[41.86,.08,2,[347,503,739],.4],deviceHealth:[94.2,.33,1,[389,541,823],1.7],reportEvents:[1286,6,0,[353,509,809],.8],
- reportAccuracy:[93.6,.36,1,[313,479,701],2.3],reportHealth:[94.2,.33,1,[389,541,823],1.7],closedLoop:[82.4,.7,1,[401,557,829],.45]
-};
-function wave(t,c){const p=c[3],ph=c[4];return Math.sin(t*6.283/p[0]+ph)*.58+Math.sin(t*6.283/p[1]+ph*1.71)*.27+Math.sin(t*6.283/p[2]+ph*2.19)*.12}
-function animateLive(ms){
- const t=ms/1000;
- document.querySelectorAll('[data-live]').forEach(el=>{
-  const key=el.dataset.live,c=liveConfigs[key];if(!c)return;
-  let v=c[0]+c[1]*wave(t,c);el.textContent=c[2]===0?Math.round(v):v.toFixed(c[2]);
+ api=cityFrame.contentWindow.PulseVisionCity;
+ if(!api){
+  if(cityFrame.dataset.retried){showToast('场景资源版本尚未同步，请强制刷新');return;}
+  cityFrame.dataset.retried='true';
+  // Refresh the embedded module only if a browser cached its pre-bridge version.
+  fetch('city.html?shared-engine=20261007').then(r=>{if(!r.ok)throw Error('Scene unavailable');return r.text();}).then(html=>{
+   const base=new URL('./',location.href).href;
+   cityFrame.srcdoc=html.replace('<head>','<head><base href="'+base+'">').replace('src="assets/city/city.js"','src="assets/city/city.js?v=shared-20261007"');
+  }).catch(()=>showToast('城市场景暂时无法加载，请刷新重试'));
+  return;
+ }
+ const style=doc.createElement('style');style.textContent=`
+ html,body{margin:0;background:#0b1522;overflow-x:hidden}.topbar,.bottom-bar,.sidebar{display:none!important}
+ .workspace{height:100vh;min-height:0;padding:0;gap:12px;grid-template-columns:minmax(0,1fr) 318px}
+ .map-panel{height:100%;min-height:0}.viewport{min-height:350px}
+ .inspector{height:100%;min-height:0;overflow-y:auto;padding:18px 15px;scrollbar-width:thin;scrollbar-color:#33546e #0b1522}
+ .inspector>section,.inspector>.reading-grid,.inspector>.detail-head,.inspector>.detail-meta,.inspector>.review-actions{flex-shrink:0}
+ .chart-section canvas#waveform{height:102px}.chart-section canvas#spectrogram{height:66px}
+ .demo-console{padding:15px 16px}.map-foot span:first-child{display:none}#sources-dialog{max-height:80vh;overflow:auto}
+ @media(max-width:900px){.workspace{display:flex;flex-direction:column;height:auto;min-height:0;gap:12px}.map-panel{height:660px;min-height:660px}.viewport{min-height:400px}.inspector{display:flex;grid-column:auto;height:auto;overflow:visible;gap:0;padding:20px}.chart-section,.chart-section:nth-of-type(2){margin-top:19px}.reading-grid,.review-actions{width:100%}.inspector-note{margin-top:12px}}`;
+ doc.head.appendChild(style);cityReady=true;api.connect();api.setVisible(currentView==='gis');api.select(pendingCityAsset);
+ log('长春场景已连接：6 项资产，地图与业务模块共用状态');refresh();
+ doc.addEventListener('click',e=>{
+  const el=e.target.closest('button');if(!el)return;
+  const actions={inject:'地图触发场景',review:'地图人工复核', 'create-order':'地图生成模拟工单', 'reset-demo':'重置本轮演示'};
+  if(el.id==='reset-demo'){activity.length=0;log('重置本轮长春演示');}
+  else if(actions[el.id])log(actions[el.id]+' / '+(selected()?.name||''));
+  else if(el.closest('.order-entry'))log('地图模拟现场确认并关闭工单');
+  setTimeout(refresh,0);
  });
- document.querySelectorAll('.dynamic-score').forEach((el,i)=>{const b=Number(el.dataset.base);el.textContent=(b+Math.sin(t/(43+i*13)+i)*.23+Math.sin(t/(71+i*19))*0.11).toFixed(1)+'%'});
- const p=68+(Math.sin(t/51)*10+Math.sin(t/89)*5);document.getElementById('overviewAgentProgress').textContent=Math.round(p)+'%';document.getElementById('overviewProgressBar').style.width=p+'%';
- requestAnimationFrame(animateLive)
-}requestAnimationFrame(animateLive);
-
-/* 额外带单位的动态项 */
-const textLive=[
- ['signal1',-18.6,.22,'dB'],['signal2',-20.2,.28,'dB'],['signal3',-19.4,.24,'dB'],['signal4',-18.9,.2,'dB'],
- ['d1dist',12.8,.04,'km'],['d2dist',10.6,.04,'km'],['d3dist',8.4,.03,'km'],['d4dist',10.1,.04,'km'],
- ['d1temp',26.4,.25,'℃'],['d2temp',25.8,.22,'℃'],['d3temp',27.1,.28,'℃'],['d4temp',26.0,.2,'℃']
-];
-function animateTextLive(ms){const t=ms/1000;textLive.forEach((x,i)=>{document.querySelectorAll('[data-live="'+x[0]+'"]').forEach(el=>el.textContent=(x[1]+Math.sin(t/(47+i*3)+i)*x[2]).toFixed(1)+x[3])});requestAnimationFrame(animateTextLive)}
-requestAnimationFrame(animateTextLive);
-
-/* Canvas：相关噪声 + 缓慢漂移 + 非周期瞬态，避免固定正弦波和等间隔尖峰 */
-const signalCanvasStates=new WeakMap(),SIGNAL_POINTS=600,SIGNAL_STEP_MS=50,SIGNAL_VISUAL_GAIN={wave:2.25,monitor:2.55,agent:2.35};
-const signalProfiles={
- wave:[
-  {label:'振动强度',c:'#42d7ff',base:.32,jitter:1.55,corr:.48,wander:.008,limit:5,eventRate:.0055,eventAmp:16,decay:.72},
-  {label:'温度',c:'#42e6a4',base:.63,jitter:.10,corr:.97,wander:.0038,limit:3.2,eventRate:.00005,eventAmp:1.2,decay:.96},
-  {label:'应变',c:'#ffad45',base:.84,jitter:.38,corr:.89,wander:.015,limit:6.5,eventRate:.00065,eventAmp:4.5,decay:.92}
- ],
- monitor:[
-  {label:'振动强度',c:'#42d7ff',base:.28,jitter:2.05,corr:.42,wander:.010,limit:7,eventRate:.0065,eventAmp:25,decay:.70},
-  {label:'温度',c:'#42e6a4',base:.55,jitter:.12,corr:.975,wander:.0048,limit:4.2,eventRate:.00008,eventAmp:1.5,decay:.97},
-  {label:'应变',c:'#ffad45',base:.78,jitter:.50,corr:.90,wander:.023,limit:10,eventRate:.0007,eventAmp:6,decay:.93}
- ],
- agent:[
-  {label:'振动强度',c:'#42d7ff',base:.30,jitter:1.80,corr:.45,wander:.009,limit:6,eventRate:.0058,eventAmp:21,decay:.71},
-  {label:'温度',c:'#42e6a4',base:.61,jitter:.11,corr:.97,wander:.0042,limit:3.8,eventRate:.00006,eventAmp:1.4,decay:.96},
-  {label:'应变',c:'#ffad45',base:.82,jitter:.44,corr:.90,wander:.020,limit:8.5,eventRate:.00065,eventAmp:5.5,decay:.93}
- ]
-};
-function clampSignal(v,min,max){return Math.max(min,Math.min(max,v))}
-function normalNoise(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
-function activeAgentMode(){const b=document.querySelector('.sample-btn.active');return b?b.dataset.sample:'construction'}
-function profileFor(type,mode){
- const profiles=signalProfiles[type].map(x=>({...x}));
- if(type!=='agent')return profiles;
- if(mode==='normal')profiles.forEach(x=>{x.jitter*=.62;x.wander*=.55;x.eventRate*=.18;x.eventAmp*=.5});
- if(mode==='construction'){profiles[0].eventRate=.016;profiles[0].eventAmp=25;profiles[0].jitter=1.65}
- if(mode==='leakage'){profiles[0].jitter=2.45;profiles[0].corr=.84;profiles[0].eventRate=.002;profiles[2].jitter=.70}
- if(mode==='deformation'){profiles[2].wander=.025;profiles[2].limit=15;profiles[2].bias=.006;profiles[2].eventRate=.0014;profiles[2].eventAmp=5}
- if(mode==='temperature'){profiles[1].wander=.020;profiles[1].limit=14;profiles[1].bias=.008;profiles[1].eventRate=.0002}
- return profiles;
-}
-function sampleChannel(ch,p){
- ch.noise=ch.noise*p.corr+normalNoise()*p.jitter;
- ch.velocity=ch.velocity*.965+normalNoise()*p.wander+(p.bias||0);
- ch.trend+=ch.velocity;
- if(Math.abs(ch.trend)>p.limit){ch.trend=clampSignal(ch.trend,-p.limit,p.limit);ch.velocity*=-.32}
- if(ch.burstLeft>0){ch.burstLeft--;ch.burst=ch.burst*.72+normalNoise()*ch.burstScale}else{ch.burst*=.5;if(Math.random()<p.eventRate*.45){ch.burstLeft=4+Math.floor(Math.random()*18);ch.burstScale=p.jitter*(1.5+Math.random()*2.5)}}
- if(Math.random()<p.eventRate)ch.impulse+=(Math.random()<.5?-1:1)*p.eventAmp*(.55+Math.random()*.9);
- ch.impulse*=p.decay;
- return ch.trend+ch.noise+ch.impulse+ch.burst;
-}
-function createCanvasState(canvas,type,mode){
- const profiles=profileFor(type,mode),channels=profiles.map(()=>({noise:0,velocity:0,trend:0,impulse:0,burst:0,burstLeft:0,burstScale:0}));
- const state={type,mode,profiles,channels,history:profiles.map(()=>[])};
- for(let n=0;n<SIGNAL_POINTS;n++)profiles.forEach((p,i)=>state.history[i].push(sampleChannel(channels[i],p)));
- signalCanvasStates.set(canvas,state);return state;
-}
-function getCanvasState(canvas,type){
- const mode=type==='agent'?activeAgentMode():'default',old=signalCanvasStates.get(canvas);
- return !old||old.type!==type||old.mode!==mode?createCanvasState(canvas,type,mode):old;
-}
-function advanceCanvas(canvas,type){
- const state=getCanvasState(canvas,type);
- state.profiles.forEach((p,i)=>{const h=state.history[i];h.push(sampleChannel(state.channels[i],p));if(h.length>SIGNAL_POINTS)h.shift()});
-}
-function drawCanvas(canvas,type){
- if(!canvas)return;const ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height,state=getCanvasState(canvas,type);ctx.clearRect(0,0,w,h);
- ctx.strokeStyle='rgba(109,190,223,.08)';ctx.lineWidth=1;for(let y=20;y<h;y+=30){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}for(let x=0;x<w;x+=60){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke()}
- state.profiles.forEach((p,idx)=>{const data=state.history[idx],dx=w/(data.length-1),gain=SIGNAL_VISUAL_GAIN[type];ctx.beginPath();ctx.strokeStyle=p.c;ctx.lineWidth=1.8;ctx.shadowColor=p.c;ctx.shadowBlur=6;data.forEach((v,i)=>{const x=i*dx,y=clampSignal(p.base*h+v*gain,4,h-4);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();ctx.shadowBlur=0});
- const signalUnits={振动强度:'dB',温度:'℃',应变:'mm'};ctx.font='12px "Microsoft YaHei",sans-serif';ctx.textBaseline='middle';state.profiles.forEach(p=>{const tag=p.label+' '+signalUnits[p.label],tagW=p.label==='振动强度'?102:82,x=w-tagW-10,y=clampSignal(p.base*h,14,h-14);ctx.fillStyle='rgba(3,18,30,.90)';ctx.fillRect(x,y-12,tagW,24);ctx.strokeStyle=p.c;ctx.lineWidth=1;ctx.strokeRect(x+.5,y-11.5,tagW-1,23);ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(x+10,y,3,0,Math.PI*2);ctx.fill();ctx.fillText(tag,x+18,y)})
-}
-function allSignalCanvases(){return [...document.querySelectorAll('.wave-canvas')].map(c=>[c,'wave']).concat([...document.querySelectorAll('.monitor-canvas')].map(c=>[c,'monitor']),[...document.querySelectorAll('.agent-canvas')].map(c=>[c,'agent']))}
-function resizeAndDraw(){allSignalCanvases().forEach(([c,type])=>drawCanvas(c,type))}
-let lastSignalStep=0;
-function canvasLoop(ms){if(!lastSignalStep)lastSignalStep=ms;if(ms-lastSignalStep>500)lastSignalStep=ms-SIGNAL_STEP_MS;while(ms-lastSignalStep>=SIGNAL_STEP_MS){allSignalCanvases().forEach(([c,type])=>advanceCanvas(c,type));lastSignalStep+=SIGNAL_STEP_MS}resizeAndDraw();requestAnimationFrame(canvasLoop)}requestAnimationFrame(canvasLoop);
-
-/* Agent */
-const sampleData={
- normal:{name:'正常运行',risk:'蓝色风险',color:'#7faeff',confidence:98.2,probs:[.4,.4,.3,.7,98.2],desc:'信号能量稳定，无持续异常峰值，设备状态与历史基线一致。',work:'FG-NORMAL-0286'},
- construction:{name:'第三方施工',risk:'红色风险',color:'#ff858b',confidence:96.4,probs:[96.4,1.8,.9,.5,.4],desc:'检测到持续性冲击振动。位置位于燃气主干线12.43km处，当前区域无登记施工许可，建议立即现场核查。',work:'FG-20260804-0286'},
- leakage:{name:'管道泄漏',risk:'红色风险',color:'#ff858b',confidence:94.8,probs:[1.2,94.8,1.4,1.3,1.3],desc:'检测到持续性中高频声纹与异常能量带，建议立即开展管道压力复核和现场检漏。',work:'FG-20260804-0287'},
- deformation:{name:'结构微形变',risk:'橙色风险',color:'#ffc16f',confidence:92.7,probs:[1.4,1.3,92.7,2.1,2.5],desc:'检测到低频缓慢漂移与应变持续变化，建议对桥梁关键构件进行复测。',work:'FG-20260804-0288'},
- temperature:{name:'异常温升',risk:'橙色风险',color:'#ffc16f',confidence:97.1,probs:[.5,.6,.7,97.1,1.1],desc:'温度序列持续上升并超过动态基线，建议核查隧道电气设施和通风状态。',work:'FG-20260804-0289'}
-};
-let selectedSample='construction';
-const labels=['第三方施工','管道泄漏','结构微形变','异常温升','正常运行'];
-function renderProbs(vals=[96.4,1.8,.9,.5,.4]){document.getElementById('probList').innerHTML=labels.map((l,i)=>'<div class="prob-row"><span>'+l+'</span><div class="bar"><i style="width:'+vals[i]+'%"></i></div><strong>'+vals[i].toFixed(1)+'%</strong></div>').join('')}
-renderProbs();
-document.querySelectorAll('.sample-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.sample-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');selectedSample=b.dataset.sample;showToast('已选择'+sampleData[selectedSample].name+'标准样本')}));
-const logTexts=['接收到监测数据','完成信号去噪与归一化','自动编码器完成异常检测','1D-CNN完成事件分类','规则引擎完成风险分级','生成巡检工单并同步GIS','事件报告已归档'];
-function renderLogs(active=0){document.getElementById('agentLogs').innerHTML=logTexts.map((x,i)=>'<div class="log-item"><span class="time">'+new Date(Date.now()-(logTexts.length-i)*900).toLocaleTimeString('zh-CN',{hour12:false})+'</span><span class="circle" style="opacity:'+(i<active?1:.18)+'"></span><span style="color:'+(i<active?'#c5e4f2':'#607f91')+'">'+x+'</span></div>').join('')}
-renderLogs(0);
-document.getElementById('runAgentBtn').addEventListener('click',()=>{
- const btn=document.getElementById('runAgentBtn'),status=document.getElementById('agentRunStatus'),steps=[...document.querySelectorAll('#view-agent .flow-step')];btn.disabled=true;status.textContent='正在分析';steps.forEach(x=>x.classList.remove('active'));renderProbs([0,0,0,0,0]);renderLogs(0);
- let i=0;const timer=setInterval(()=>{if(i<steps.length)steps[i].classList.add('active');renderLogs(Math.min(i+2,7));i++;if(i>steps.length){clearInterval(timer);const d=sampleData[selectedSample];renderProbs(d.probs);document.getElementById('agentResult').innerHTML='<div style="font-size:11px;color:'+d.color+'">● '+d.risk+'</div><h4>'+d.name+'</h4><p>'+d.desc+'</p><div style="font-size:10px;color:#b5d1df;margin-top:10px">工单 '+d.work+' · 推理耗时 '+(36+Math.random()*5).toFixed(1)+'ms</div>';status.textContent='分析完成';btn.disabled=false;showToast('智能分析与处置链路已完成')}} ,650)
 });
+for(const id of ['overview','monitor','alerts','agent','devices','reports'])$('view-'+id).innerHTML=empty('正在连接长春城市演示引擎…');
+ensureCityFrame();setInterval(()=>{if(!document.hidden)refresh();},200);window.addEventListener('resize',()=>snapshot&&renderSignal(snapshot.signal));
 
-/* 订阅 */
-function openPlan(mode){
- const modal=document.getElementById('planModal'),type=document.getElementById('planType');
- if(mode==='hardware')type.value='hardware';else if(mode==='security')type.value='private';else type.value='pro';
- document.getElementById('planModalTitle').textContent=mode==='hardware'?'基础硬件建设方案':mode==='security'?'数据安全与增值方案':'SaaS订阅服务配置';
- modal.classList.add('show');updateQuote()
-}
-function closePlan(){document.getElementById('planModal').classList.remove('show')}
-function getQuote(){
- const type=document.getElementById('planType').value,km=Math.max(1,Number(document.getElementById('planKm').value||1)),dev=Math.max(1,Number(document.getElementById('planDevices').value||1));let service=3*km/100,label='SaaS基础版';
- if(type==='pro'){service=8*km/100;label='SaaS专业版'}if(type==='ultimate'){service=20;label='SaaS旗舰版'}if(type==='private'){service=65;label='私有化部署'}if(type==='hardware'){service=0;label='基础硬件建设'}
- return{type,km,dev,service,hardware:dev*35,label}
-}
-function updateQuote(){const q=getQuote();document.getElementById('quoteBox').textContent='当前选择：'+q.label+'；预计年度/部署服务费：'+q.service.toFixed(1)+'万元；硬件基础建设：'+q.hardware.toFixed(1)+'万元；监测里程：'+q.km+'公里。'}
-function submitLead(){showToast('方案需求已提交，客户经理将跟进配置清单');closePlan()}
-document.querySelectorAll('#planModal input,#planModal select').forEach(x=>x.addEventListener('input',updateQuote));
-window.openPlan=openPlan;window.closePlan=closePlan;window.updateQuote=updateQuote;window.submitLead=submitLead;
-
-/* 分析详情 */
-function openAnalysis(){document.getElementById('analysisModal').classList.add('show')}function closeAnalysis(){document.getElementById('analysisModal').classList.remove('show')}
-window.openAnalysis=openAnalysis;window.closeAnalysis=closeAnalysis;
-document.querySelectorAll('.modal-mask').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')}));
+/* 原订阅价格与方案功能保留。 */
+function openPlan(mode){const modal=$('planModal'),type=$('planType');type.value=mode==='hardware'?'hardware':mode==='security'?'private':'pro';$('planModalTitle').textContent=mode==='hardware'?'基础硬件建设方案':mode==='security'?'数据安全与增值方案':'SaaS订阅服务配置';modal.classList.add('show');updateQuote();}
+function closePlan(){$('planModal').classList.remove('show');}
+function getQuote(){const type=$('planType').value,km=Math.max(1,Number($('planKm').value||1)),dev=Math.max(1,Number($('planDevices').value||1));let service=3*km/100,label='SaaS基础版';if(type==='pro'){service=8*km/100;label='SaaS专业版';}if(type==='ultimate'){service=20;label='SaaS旗舰版';}if(type==='private'){service=65;label='私有化部署';}if(type==='hardware'){service=0;label='基础硬件建设';}return{type,km,dev,service,hardware:dev*35,label};}
+function updateQuote(){const q=getQuote();$('quoteBox').textContent='当前选择：'+q.label+'；预计年度/部署服务费：'+q.service.toFixed(1)+'万元；硬件基础建设：'+q.hardware.toFixed(1)+'万元；监测里程：'+q.km+'公里。';}
+function submitLead(){showToast('方案需求已提交，客户经理将跟进配置清单');closePlan();}
+document.querySelectorAll('#planModal input,#planModal select').forEach(el=>el.addEventListener('input',updateQuote));
+Object.assign(window,{openPlan,closePlan,updateQuote,submitLead});
+document.querySelectorAll('.modal-mask').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('show');}));
 </script>
 </body>
 </html>

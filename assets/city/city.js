@@ -27,6 +27,7 @@ const $ = (id) => document.getElementById(id);
 const state = { selected: ASSETS[1], filter: 'all', search: '', paused: false, time: 0, orders: [], serial: 0, signals: [], buildings: true, labels: true, view: '3d' };
 let scene, renderer, camera, controls, buildingGroup, selectionRing;
 let raycaster, cursor, viewport, dragStart, cameraTween;
+let hostConnected = false, hostSceneVisible = true, hostClock = 0;
 const objects = new Map();
 const labels = [];
 const clickable = [];
@@ -275,6 +276,7 @@ function animateCamera(position,target) {
 }
 function fitCamera() {
   if(!camera)return;
+  if(!viewport.clientWidth||!viewport.clientHeight)return;
   const ratio=viewport.clientWidth/viewport.clientHeight;
   const zoom=ratio<1?Math.min(1.55,1/ratio):1;
   const position=state.view==='2d'?new THREE.Vector3(0,208*zoom,.04):new THREE.Vector3(96*zoom,126*zoom,142*zoom);
@@ -284,10 +286,10 @@ function initScene() {
   viewport=$('viewport');
   scene=new THREE.Scene();scene.background=new THREE.Color('#0b1524');scene.fog=new THREE.Fog('#0b1524',190,410);
   renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true,powerPreference:'low-power'});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,1.8));renderer.setSize(viewport.clientWidth,viewport.clientHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.28;viewport.append(renderer.domElement);
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.8));renderer.setSize(Math.max(1,viewport.clientWidth),Math.max(1,viewport.clientHeight));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.28;viewport.append(renderer.domElement);
   renderer.domElement.setAttribute('aria-label','长春城市三维模型，使用鼠标旋转和缩放，点击发光设施查看详情');
   renderer.domElement.setAttribute('role','img');
-  camera=new THREE.PerspectiveCamera(40,viewport.clientWidth/viewport.clientHeight,.1,600);camera.position.set(96,126,142);
+  camera=new THREE.PerspectiveCamera(40,Math.max(1,viewport.clientWidth)/Math.max(1,viewport.clientHeight),.1,600);camera.position.set(96,126,142);
   controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.07;controls.minDistance=30;controls.maxDistance=340;controls.maxPolarAngle=Math.PI/2.2;controls.enablePan=true;
   controls.addEventListener('start',()=>{cameraTween=null;});
   scene.add(new THREE.HemisphereLight('#c7e3ee','#172736',2.1));
@@ -303,7 +305,7 @@ function initScene() {
   });
   renderer.domElement.addEventListener('contextmenu',event=>event.preventDefault());
   let previousAspect=camera.aspect;
-  const resize=new ResizeObserver(()=>{camera.aspect=viewport.clientWidth/viewport.clientHeight;camera.updateProjectionMatrix();renderer.setSize(viewport.clientWidth,viewport.clientHeight);if(Math.abs(previousAspect-camera.aspect)>.2)fitCamera();previousAspect=camera.aspect;});resize.observe(viewport);
+  const resize=new ResizeObserver(()=>{if(!viewport.clientWidth||!viewport.clientHeight)return;camera.aspect=viewport.clientWidth/viewport.clientHeight;camera.updateProjectionMatrix();renderer.setSize(viewport.clientWidth,viewport.clientHeight);if(Math.abs(previousAspect-camera.aspect)>.2)fitCamera();previousAspect=camera.aspect;});resize.observe(viewport);
   renderer.domElement.addEventListener('webglcontextlost',event=>{event.preventDefault();showSceneError('浏览器图形资源暂时中断，请刷新页面恢复场景。');});
   $('loading').hidden=true;
 }
@@ -315,7 +317,7 @@ function prepareCanvas(canvas) {
   const ctx=canvas.getContext('2d');ctx.setTransform(ratio,0,0,ratio,0,0);return{ctx,width,height};
 }
 const signalSources = new Map();
-function drawSignal(t) {
+function signalFrame(t) {
   const asset=state.selected,event=asset.event,active=event&&asset.status!=='closed';
   const kind=active?event.kind:'background',start=active?event.signalStart:-Infinity;
   const key=`${asset.id}:${kind}:${start}`;
@@ -324,7 +326,11 @@ function drawSignal(t) {
     for (const existing of signalSources.keys()) if (existing.startsWith(`${asset.id}:`)) signalSources.delete(existing);
     signalSources.set(key,createSignalSource(assetSeed(asset.id),kind,start));
   }
-  const signal=signalSources.get(key).window(t);
+  return signalSources.get(key).window(t);
+}
+function drawSignal(t) {
+  const asset=state.selected;
+  const signal=signalFrame(t);
   $('amplitude').textContent=signal.rms.toFixed(3);
   $('frequency').textContent=signal.dominantHz===null?'—':signal.dominantHz.toFixed(1);
   const{ctx,width:w,height:h}=prepareCanvas($('waveform'));ctx.clearRect(0,0,w,h);
@@ -382,9 +388,9 @@ let lastFrame=0,lastChart=0;
 function frame(now) {
   requestAnimationFrame(frame);
   const dt=Math.min(.1,(now-lastFrame)/1000||0);lastFrame=now;
-  if(!state.paused&&!document.hidden)state.time+=dt;
+  if(!hostConnected&&!state.paused&&!document.hidden)state.time+=dt;
   if(document.hidden)return;
-  if(renderer&&camera) {
+  if(renderer&&camera&&(!hostConnected||hostSceneVisible)) {
     if(cameraTween) {
       const progress=Math.min(1,(now-cameraTween.start)/800),ease=1-Math.pow(1-progress,3);
       camera.position.lerpVectors(cameraTween.from,cameraTween.to,ease);controls.target.lerpVectors(cameraTween.fromTarget,cameraTween.toTarget,ease);if(progress===1)cameraTween=null;
@@ -394,7 +400,7 @@ function frame(now) {
     if(selectionRing&&!reducedMotion)selectionRing.material.opacity=.65+.2*Math.sin(state.time*2);
     updateLabels();renderer.render(scene,camera);
   }
-  if(now-lastChart>100){drawSignal(state.time);lastChart=now;}
+  if((!hostConnected||hostSceneVisible)&&now-lastChart>100){drawSignal(state.time);lastChart=now;}
 }
 
 function download(data,filename,mime) {
@@ -471,3 +477,25 @@ try{initScene();}catch(error){console.error('City scene initialization failed:',
 renderAssets();renderDetail();
 const updateClock=()=>{$('clock').textContent=new Date().toLocaleString('zh-CN',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});};updateClock();setInterval(updateClock,1000);
 requestAnimationFrame(frame);
+
+// Optional same-origin host API. Standalone city.html keeps its existing behavior.
+// The platform reads the exact same state and samples; no secondary simulation.
+window.PulseVisionCity = Object.freeze({
+  connect() { hostConnected=true;hostClock=performance.now(); },
+  setVisible(visible) { hostSceneVisible=!!visible; },
+  snapshot() {
+    if(hostConnected){const now=performance.now();if(!state.paused&&!document.hidden)state.time+=Math.min(.35,Math.max(0,(now-hostClock)/1000));hostClock=now;}
+    return {
+      simulated:true,time:state.time,paused:state.paused,selectedId:state.selected.id,
+      assets:ASSETS.map(a=>({id:a.id,name:a.name,type:a.type,typeName:TYPES[a.type].name,color:TYPES[a.type].color,location:a.location,length:a.length,status:a.status,statusText:statusText(a),extension:!!a.extension,event:a.event?{...a.event,name:SCENARIOS[a.event.kind].name,description:SCENARIOS[a.event.kind].description}:null})),
+      orders:state.orders.map(o=>({...o})),signal:signalFrame(state.time),
+    };
+  },
+  select(id) {const a=ASSETS.find(a=>a.id===id);if(a)selectAsset(a,hostSceneVisible);},
+  inject(kind) {if(!Object.hasOwn(SCENARIOS,kind))return;$('scenario').value=kind;$('inject').click();},
+  review() {$('review').click();},
+  createOrder() {$('create-order').click();},
+  closeOrder(id) {const o=state.orders.find(o=>o.id===id);if(!o||o.complete)return;selectAsset(ASSETS.find(a=>a.id===o.assetId),false);const entry=[...$('orders').children].find(el=>el.querySelector('strong')?.textContent.startsWith(id+' /'));entry?.querySelector('button')?.click();},
+  pause() {$('pause').click();},
+  reset() {$('reset-demo').click();},
+});
