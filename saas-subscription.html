@@ -209,7 +209,7 @@ button{cursor:pointer}
       <div class="view" id="view-gis">
         <section class="panel city-integration">
           <div class="panel-title"><div><h3>长春城市管网与桥梁监测</h3><p>旋转、缩放或点选城市设施；右侧查看振动、候选事件与人工复核记录。</p></div><div class="signal-controls"><select id="cityAssetSelect" aria-label="选择长春监测资产"><option value="CC-G02">卫星路燃气管网</option><option value="CC-W01">人民大街供水管网</option><option value="CC-H03">南湖大路供热管网</option><option value="CC-D04">伊通河沿岸排水管网</option><option value="CC-B05">长春大桥</option><option value="CC-B06">南湖大桥</option></select><button class="small-btn" onclick="cityDataInfo()">数据说明</button><button class="small-btn" onclick="switchView('overview')">返回驾驶舱</button></div></div>
-          <iframe id="cityFrame" class="city-frame" title="长春城市交互监测场景" data-src="city.html?v=20261007" allow="fullscreen"></iframe>
+          <iframe id="cityFrame" class="city-frame" title="长春城市交互监测场景" data-src="city.html?v=background-20261007" allow="fullscreen"></iframe>
           <div class="city-gis-note"><span>长春场景示意 · 6 项管网与桥梁资产 · 合成振动信号</span><span>幅度为归一化 RMS；主频与时频图由波形计算，未作实测标定。</span></div>
         </section>
       </div>
@@ -347,14 +347,16 @@ function renderSignal(signal){
  if(!signal)return;
  document.querySelectorAll('[data-reading="rms"]').forEach(el=>el.textContent=signal.rms.toFixed(3));
  document.querySelectorAll('[data-reading="frequency"]').forEach(el=>el.textContent=signal.dominantHz===null?'—':signal.dominantHz.toFixed(1));
- document.querySelectorAll('[data-reading="playback"]').forEach(el=>el.textContent=snapshot.paused?'已暂停':'模拟运行');
+ document.querySelectorAll('[data-reading="playback"]').forEach(el=>el.textContent=snapshot.paused?'已暂停':'采样中');
  document.querySelectorAll('canvas[data-chart]').forEach(canvas=>{
   const c=canvasContext(canvas);if(!c)return;const{ctx,w,h}=c;ctx.fillStyle='#0b1522';ctx.fillRect(0,0,w,h);
   if(canvas.dataset.chart==='spectrum'){
    for(const column of signal.columns)for(let y=0;y<h;y+=2){const bin=Math.max(1,Math.min(100,Math.round((1-y/h)*100))),db=10*Math.log10(column.power[bin]+1e-12),p=Math.max(0,Math.min(1,(db+65)/55));ctx.fillStyle=`hsl(${241-p*190},${58+p*28}%,${9+p*47}%)`;ctx.fillRect(column.position*w,y,w/64+1,2);}return;
   }
   ctx.strokeStyle='#203148';ctx.lineWidth=.6;for(let y=1;y<4;y++){ctx.beginPath();ctx.moveTo(0,y*h/4);ctx.lineTo(w,y*h/4);ctx.stroke();}for(let x=1;x<8;x++){ctx.beginPath();ctx.moveTo(w*x/8,0);ctx.lineTo(w*x/8,h);ctx.stroke();}
-  ctx.beginPath();for(let x=0;x<Math.floor(w);x++){const begin=Math.floor(x/w*signal.values.length),end=Math.max(begin+1,Math.floor((x+1)/w*signal.values.length));let low=Infinity,high=-Infinity;for(let i=begin;i<end;i++){low=Math.min(low,signal.values[i]);high=Math.max(high,signal.values[i]);}const top=Math.max(3,Math.min(h-3,h/2-high*h*.34)),bottom=Math.max(3,Math.min(h-3,h/2-low*h*.34));ctx.moveTo(x+.5,top);ctx.lineTo(x+.5,Math.max(top+.7,bottom));}ctx.strokeStyle=selected().status==='warning'?'#ffbd69':'#68dce9';ctx.lineWidth=1;ctx.stroke();
+  const range=signal.displayRange||1.5;
+  ctx.beginPath();for(let x=0;x<Math.floor(w);x++){const begin=Math.floor(x/w*signal.values.length),end=Math.max(begin+1,Math.floor((x+1)/w*signal.values.length));let low=Infinity,high=-Infinity;for(let i=begin;i<end;i++){low=Math.min(low,signal.values[i]);high=Math.max(high,signal.values[i]);}const top=Math.max(3,Math.min(h-3,h/2-high*h*.44/range)),bottom=Math.max(3,Math.min(h-3,h/2-low*h*.44/range));ctx.moveTo(x+.5,top);ctx.lineTo(x+.5,Math.max(top+.7,bottom));}ctx.strokeStyle=selected().status==='warning'?'#ffbd69':'#68dce9';ctx.lineWidth=1;ctx.stroke();
+  ctx.fillStyle='#8ca8be';ctx.font='11px sans-serif';ctx.textAlign='right';ctx.fillText(`量程 ±${range.toFixed(2)} a.u.`,w-10,18);ctx.textAlign='left';
  });
 }
 function download(value,name){const uri=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=uri;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(uri),2000);}

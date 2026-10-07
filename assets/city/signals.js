@@ -20,14 +20,66 @@ export function assetSeed(id) {
   return seed >>> 0;
 }
 
-export function createSignalSource(seed, kind = 'background', start = -Infinity) {
+// Illustrative operating backgrounds, not measured signatures of these assets.
+const BACKGROUNDS = {
+  water: { noise: .060, hz: 18, tone: .055, spacing: 3.1, pulse: .20, decay: .42 },
+  gas: { noise: .045, hz: 24, tone: .030, spacing: 4.7, pulse: .13, decay: .24 },
+  heat: { noise: .052, hz: 30, tone: .062, spacing: 3.8, pulse: .18, decay: .48 },
+  drain: { noise: .080, hz: 11, tone: .038, spacing: 2.8, pulse: .24, decay: .60 },
+  bridge: { noise: .047, hz: 7, tone: .044, spacing: 3.0, pulse: .34, decay: .83 },
+};
+export function createSignalSource(seed, kind = 'background', start = -Infinity, assetType = 'gas') {
   const samples = new Map(), spectra = new Map();
+  const profile = BACKGROUNDS[assetType] || BACKGROUNDS.gas;
   function synthesize(index) {
     const t = index / SAMPLE_RATE;
     const gain = .82 + .34 * random(17, seed);
     // Mixed time scales yield colored noise and a slow, irregular noise floor.
     let value = (.022 * noise(t, 95, seed) + .018 * noise(t, 27, seed + 31)
       + .010 * noise(t, 7, seed + 71)) * (1 + .24 * noise(t, .7, seed + 82));
+    // Persistent, colored operating noise with wandering amplitude and phase.
+    // Quiet intervals remain quiet; normal background activity is not an alarm.
+    const envelope = .85 + .36 * noise(t, .38, seed + 501) + .18 * noise(t, 1.2, seed + 502);
+    const hz = profile.hz * (.88 + .25 * random(25, seed));
+    const phase = TAU * hz * t + 1.3 * noise(t, .55, seed + 503);
+    const colored = .64 * noise(t, 72, seed + 504) + .48 * noise(t, 19, seed + 505);
+    if (assetType === 'water') {
+      const pumpLoad = .70 + .32 * noise(t, .27, seed + 506);
+      value += envelope * profile.noise * colored
+        + pumpLoad * profile.tone * (Math.sin(phase) + .38 * Math.sin(2 * phase));
+    } else if (assetType === 'heat') {
+      // A steadier narrow-band component, with mild operating-load changes.
+      value += .38 * profile.noise * colored
+        + envelope * profile.tone * (Math.sin(phase) + .17 * Math.sin(2 * phase));
+    } else if (assetType === 'drain') {
+      // Flow-like broadband texture: broad swells, no permanent sine carrier.
+      const flow = 1.15 + .72 * noise(t, .65, seed + 506);
+      value += flow * profile.noise * (1.35 * colored + .60 * noise(t, 9, seed + 507));
+    } else if (assetType === 'bridge') {
+      // Relatively quiet between passing loads, not continuous machine hum.
+      value += .55 * profile.noise * colored + .018 * noise(t, 4, seed + 506);
+    } else {
+      value += envelope * (profile.noise * colored
+        + profile.tone * (Math.sin(phase) + .25 * Math.sin(1.61 * phase)));
+    }
+    // Uneven passing loads / flow transients: vary timing, strength and ringing.
+    const backgroundSlot = Math.floor(t / profile.spacing);
+    for (let k = backgroundSlot - 2; k <= backgroundSlot; k++) {
+      if (random(k, seed + 510) < .16) continue;
+      const age = t - (k * profile.spacing + profile.spacing * .72 * random(k, seed + 511));
+      const decay = profile.decay * (.72 + .70 * random(k, seed + 512));
+      if (age < 0 || age > decay * 5) continue;
+      const attack = assetType === 'bridge' ? .17 : .065;
+      const transient = assetType === 'bridge'
+        ? Math.exp(-.5 * ((age - decay) / (decay * .48)) ** 2)
+        : (1 - Math.exp(-age / attack)) * Math.exp(-age / decay);
+      const strength = profile.pulse * (.55 + .90 * random(k, seed + 513));
+      const transientHz = hz * (.72 + .60 * random(k, seed + 514));
+      const transientTexture = assetType === 'drain'
+        ? .95 * noise(t, 44, seed + k + 515) + .45 * noise(t, 12, seed + k + 516)
+        : .72 * Math.sin(TAU * transientHz * age) + .56 * noise(t, 58, seed + k + 515);
+      value += strength * transient * transientTexture;
+    }
     if (t < start || kind === 'background') return value * gain;
     const elapsed = t - (Number.isFinite(start) ? start : 0);
     if (kind === 'construction') {
@@ -135,7 +187,12 @@ export function createSignalSource(seed, kind = 'background', start = -Infinity)
     // Bounded cache; repeated draws at a frozen time are bit-for-bit identical.
     for (const index of samples.keys()) if (index < begin - FFT_SIZE) samples.delete(index);
     for (const index of spectra.keys()) if (index < begin - FFT_SIZE) spectra.delete(index);
-    return {values, rms, dominantHz, columns};
+    // Explicit display range improves quiet-background readability without
+    // changing samples, RMS or frequency. Not for comparing screen heights.
+    const displayRange = kind === 'construction' || kind === 'unknown' ? 1.5
+      : kind === 'traffic' ? .75
+      : ({water:.35,gas:.30,heat:.32,drain:.40,bridge:.75}[assetType] || .35);
+    return {values, rms, dominantHz, columns, displayRange};
   }
   return {window};
 }

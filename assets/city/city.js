@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from '../vendor/OrbitControls.js';
-import { createSignalSource, assetSeed } from './signals.js';
+import { createSignalSource, assetSeed } from './signals.js?v=background-20261007';
 
 // Presentation model only. Asset coordinates/routes do not describe real utilities.
 const TYPES = {
@@ -324,7 +324,7 @@ function signalFrame(t) {
   if (!signalSources.has(key)) {
     // Keep only the current source for each asset, including after reset/injection.
     for (const existing of signalSources.keys()) if (existing.startsWith(`${asset.id}:`)) signalSources.delete(existing);
-    signalSources.set(key,createSignalSource(assetSeed(asset.id),kind,start));
+    signalSources.set(key,createSignalSource(assetSeed(asset.id),kind,start,asset.type));
   }
   return signalSources.get(key).window(t);
 }
@@ -344,11 +344,13 @@ function drawSignal(t) {
     const begin=Math.floor(x/pixels*signal.values.length),end=Math.max(begin+1,Math.floor((x+1)/pixels*signal.values.length));
     let low=Infinity,high=-Infinity;
     for(let i=begin;i<end;i++){low=Math.min(low,signal.values[i]);high=Math.max(high,signal.values[i]);}
-    const y1=Math.max(2,Math.min(h-2,h/2-high*h*.34));
-    const y2=Math.max(2,Math.min(h-2,h/2-low*h*.34));
+    const y1=Math.max(2,Math.min(h-2,h/2-high*h*.44/signal.displayRange));
+    const y2=Math.max(2,Math.min(h-2,h/2-low*h*.44/signal.displayRange));
     ctx.moveTo(x+.5,y1);ctx.lineTo(x+.5,Math.max(y1+.65,y2));
   }
   ctx.strokeStyle=asset.status==='warning'?'#ffbd69':'#68dce9';ctx.lineWidth=1;ctx.stroke();
+  ctx.fillStyle='#8ca8be';ctx.font='10px sans-serif';ctx.textAlign='right';
+  ctx.fillText(`量程 ±${signal.displayRange.toFixed(2)} a.u.`,w-6,13);ctx.textAlign='left';
   const spec=prepareCanvas($('spectrogram'));
   spec.ctx.fillStyle='#091528';spec.ctx.fillRect(0,0,spec.width,spec.height);
   const columnWidth=spec.width/64;
