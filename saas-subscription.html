@@ -401,14 +401,14 @@ cityFrame.addEventListener('load',()=>{
  html,body{margin:0;background:#0b1522;overflow-x:hidden}.topbar,.bottom-bar,.sidebar{display:none!important}
  .workspace{height:100vh;min-height:0;padding:0;gap:12px;grid-template-columns:minmax(0,1fr) 318px}
  .map-panel{height:100%;min-height:0}.viewport{min-height:350px}
- .legend{position:static;flex:0 0 auto;align-self:stretch;margin:0;padding:10px 16px;border:0;border-top:1px solid #243246;border-radius:0;background:#0b1724;display:flex;flex-wrap:wrap;gap:8px 16px}
+ .legend{position:absolute;left:12px;right:auto;bottom:12px;top:auto;width:max-content;max-width:calc(100% - 24px);margin:0;padding:8px 10px;border:1px solid #243246;border-radius:6px;background:#0b1724e8;display:flex;flex-wrap:wrap;gap:8px 12px;z-index:3}
  .map-foot,.demo-console{flex-shrink:0}
  .inspector{height:100%;min-height:0;overflow-y:auto;padding:18px 15px;scrollbar-width:thin;scrollbar-color:#33546e #0b1522}
  .inspector>section,.inspector>.reading-grid,.inspector>.detail-head,.inspector>.detail-meta,.inspector>.review-actions{flex-shrink:0}
  .chart-section canvas#waveform{height:102px}.chart-section canvas#spectrogram{height:66px}
  .demo-console{padding:15px 16px}.map-foot span:first-child{display:none}#sources-dialog{max-height:80vh;overflow:auto}
  @media(max-width:900px){.workspace{display:flex;flex-direction:column;height:auto;min-height:0;gap:12px}.map-panel{height:660px;min-height:660px}.viewport{min-height:400px}.inspector{display:flex;grid-column:auto;height:auto;overflow:visible;gap:0;padding:20px}.chart-section,.chart-section:nth-of-type(2){margin-top:19px}.reading-grid,.review-actions{width:100%}.inspector-note{margin-top:12px}}`;
- doc.head.appendChild(style);cityReady=true;api.connect();api.setVisible(currentView==='gis');api.select(pendingCityAsset);
+ doc.head.appendChild(style);doc.getElementById('viewport').appendChild(doc.querySelector('.legend'));cityReady=true;api.connect();api.setVisible(currentView==='gis');api.select(pendingCityAsset);
  log('长春场景已连接：6 项资产，地图与业务模块共用状态');refresh();
  doc.addEventListener('click',e=>{
   const el=e.target.closest('button');if(!el)return;
