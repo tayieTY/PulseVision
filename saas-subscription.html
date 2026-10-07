@@ -129,6 +129,23 @@ button{cursor:pointer}
 .modal-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
 .toast{position:fixed;right:23px;bottom:23px;z-index:150;padding:12px 15px;border-radius:11px;border:1px solid rgba(73,211,255,.25);background:#0e263b;color:#dff8ff;box-shadow:var(--shadow);opacity:0;transform:translateY(8px);transition:.25s;font-size:11px}.toast.show{opacity:1;transform:none}
 .empty-space{height:8px}
+/* 长春场景只嵌入本页 GIS，保留原有平台导航与其他业务模块。 */
+.brand-mark{position:relative;overflow:hidden;background:#edf5fb;box-shadow:none;border-radius:10px}
+.brand-mark img{position:absolute;width:54px;height:54px;max-width:none;left:-3px;top:-8px}
+.city-launch{padding:20px;min-height:421px}.city-launch .panel-title{margin-bottom:19px}
+.city-asset-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.city-asset-button{border:1px solid var(--line);border-radius:12px;padding:15px;text-align:left;color:var(--text);background:rgba(19,48,69,.52);transition:background .2s,border-color .2s}
+.city-asset-button:hover{background:rgba(33,85,115,.65);border-color:var(--cyan)}
+.city-asset-button strong{display:block;font-size:13px;margin-bottom:6px}.city-asset-button span{font-size:10px;color:var(--muted)}
+.city-launch-note{font-size:11px;line-height:1.7;color:var(--muted);margin:17px 0 0}
+.city-guide{padding:18px}.city-guide ol{margin:0;padding-left:21px;color:#a8c8d9;font-size:12px;line-height:2}.city-guide small{display:block;color:var(--muted);font-size:10px;line-height:1.6;margin-top:12px}
+.city-integration{padding:16px}.city-integration .panel-title{align-items:center;flex-wrap:wrap}
+.city-integration select{max-width:220px;background:#10283d;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:12px}
+.city-integration .panel-title p{max-width:550px}.city-integration:after{display:none}
+.city-frame{display:block;width:100%;height:850px;border:1px solid var(--line);border-radius:12px;background:#0b1522}
+.city-gis-note{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:11px;color:var(--muted);font-size:10px;line-height:1.6}
+@media(max-width:1150px){.city-frame{height:1460px}}
+@media(max-width:620px){.city-asset-grid{grid-template-columns:1fr}.city-launch{min-height:0}.city-integration{padding:10px}.city-integration .signal-controls{width:100%}.city-integration select{max-width:100%;flex:1}.city-frame{height:1490px}}
 @media(max-width:1280px){.kpis{grid-template-columns:repeat(3,1fr)}.hero,.main-grid,.monitor-grid,.agent-layout{grid-template-columns:1fr}.device-grid,.report-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:1050px){.pricing-grid{grid-template-columns:1fr}.pulse-pricing-card.featured{transform:none}.pulse-pricing-card.featured:hover{transform:translateY(-8px)}.pulse-lead-panel{align-items:flex-start;flex-direction:column}}
 @media(max-width:900px){.app{grid-template-columns:82px 1fr}.sidebar{padding:17px 9px}.brand h1,.brand p,.nav .txt,.sidebar-card{display:none}.brand{justify-content:center;padding-left:0;padding-right:0}.nav button{justify-content:center}.content{padding:15px}.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.mini-metrics{grid-template-columns:repeat(2,1fr)}}
@@ -139,7 +156,7 @@ button{cursor:pointer}
 <div class="app">
   <aside class="sidebar">
     <div class="brand">
-      <div class="brand-mark"><svg viewBox="0 0 24 24"><path d="M13.6 1.8 4 13.2h7.2l-1.1 9 9.9-13.4h-7.4l1-7Z"/></svg></div>
+      <div class="brand-mark"><img src="assets/city/pulsevision-logo.png" alt="光脉智瞳 Logo"></div>
   <div><h1>光脉智瞳 Plus</h1><p>城市生命线光纤神经元</p></div>
     </div>
     <nav class="nav" id="nav">
@@ -187,17 +204,20 @@ button{cursor:pointer}
         </div>
 
         <div class="main-grid">
-          <section class="panel map-panel">
-            <div class="panel-title"><div><h3>全域感知网络</h3><p>燃气、供水、桥梁、隧道关键设施统一接入</p></div><span class="badge green">8 条通道在线</span></div>
-            <div class="map map-shared">
-              <div class="scan"></div>
-              <div class="map-legend"><span><i class="gas"></i>燃气管线</span><span><i class="water"></i>供水管线</span><span><i class="bridge"></i>桥梁监测光纤</span><span><i class="tunnel"></i>隧道监测光纤</span></div>
-              <svg viewBox="0 0 900 420" preserveAspectRatio="none"><g stroke="rgba(111,170,197,.12)"><path d="M0 70H900M0 140H900M0 210H900M0 280H900M0 350H900"/><path d="M90 0V420M180 0V420M270 0V420M360 0V420M450 0V420M540 0V420M630 0V420M720 0V420M810 0V420"/></g><g fill="none" stroke-linecap="round"><path d="M40 330C130 290 190 350 275 280S420 230 505 260S655 180 850 130" stroke="#42d7ff" stroke-width="2.4"/><path d="M65 100C190 145 230 80 350 125S560 210 820 270" stroke="#4c8dff" stroke-width="2"/><path d="M110 380C240 300 305 350 390 310S560 320 740 370" stroke="#42e6a4" stroke-width="2"/><path d="M315 25C370 110 420 130 480 135S600 110 690 40" stroke="#ffad45" stroke-width="2" stroke-dasharray="6 7"/></g></svg>
-              <div class="node" style="left:12%;top:72%" data-label="供水输送线 B"></div><div class="node warn" style="left:35%;top:60%" data-label="桥梁监测 C"></div><div class="node danger" style="left:58%;top:57%" data-label="燃气主干线 A · K12+430"></div><div class="node" style="left:76%;top:31%" data-label="隧道监测 D"></div>
+          <section class="panel city-launch">
+            <div class="panel-title"><div><h3>长春城市资产</h3><p>选择管段或桥梁，在 GIS 中查看位置、振动与处置记录</p></div><span class="badge blue">6 项示意资产</span></div>
+            <div class="city-asset-grid">
+              <button class="city-asset-button" onclick="openCityAsset('CC-W01')"><strong>人民大街 · 供水管网</strong><span>CC-W01 / 南关区场景</span></button>
+              <button class="city-asset-button" onclick="openCityAsset('CC-G02')"><strong>卫星路 · 燃气管网</strong><span>CC-G02 / 施工扰动演示</span></button>
+              <button class="city-asset-button" onclick="openCityAsset('CC-H03')"><strong>南湖大路 · 供热管网</strong><span>CC-H03 / 朝阳区场景</span></button>
+              <button class="city-asset-button" onclick="openCityAsset('CC-D04')"><strong>伊通河沿岸 · 排水管网</strong><span>CC-D04 / 沿河街区场景</span></button>
+              <button class="city-asset-button" onclick="openCityAsset('CC-B05')"><strong>长春大桥</strong><span>CC-B05 / 桥梁振动扩展场景</span></button>
+              <button class="city-asset-button" onclick="openCityAsset('CC-B06')"><strong>南湖大桥</strong><span>CC-B06 / 桥梁振动扩展场景</span></button>
             </div>
+            <p class="city-launch-note">以南湖、人民大街与伊通河一带为背景，查看城市地下管网与桥梁的监测场景。城市形态、管线路径和监测数据均为模拟，不代表真实部署。</p>
           </section>
           <div class="side-stack">
-            <section class="panel wave-panel"><div class="panel-title"><div><h3>实时多物理量监测</h3><p>最近30秒数据窗口</p></div><span class="badge green">LIVE</span></div><canvas class="wave-canvas" width="520" height="155"></canvas></section>
+            <section class="panel city-guide"><div class="panel-title"><div><h3>长春场景操作</h3><p>在同一资产下查看信号与处置过程</p></div><span class="badge blue">交互演示</span></div><ol><li>选择管网或桥梁，进入 GIS 场景。</li><li>点击设施，查看振动幅度、主频和时频图。</li><li>触发施工扰动，人工复核后生成模拟工单。</li></ol><small>波形带有不规律冲击和背景噪声；幅度、主频及频谱来自同一组合成信号。</small></section>
             <section class="panel alerts-panel"><div class="panel-title"><div><h3>实时风险预警</h3><p>AI识别 + Agent处置</p></div><span class="badge red">4条</span></div><div class="alert-list"><div class="alert red"><div class="alert-dot"></div><div><strong>第三方施工风险</strong><p>燃气主干线A · K12+430</p></div><div class="score dynamic-score" data-base="96.4">96.4%</div></div><div class="alert"><div class="alert-dot"></div><div><strong>异常温升趋势</strong><p>隧道监测D · K06+810</p></div><div class="score dynamic-score" data-base="87.2">87.2%</div></div><div class="alert blue"><div class="alert-dot"></div><div><strong>结构微形变</strong><p>桥梁监测C · S2墩</p></div><div class="score dynamic-score" data-base="82.8">82.8%</div></div></div></section>
           </div>
         </div>
@@ -205,20 +225,10 @@ button{cursor:pointer}
 
       <!-- 2 GIS -->
       <div class="view" id="view-gis">
-        <div class="mini-metrics">
-          <div class="panel mini"><span>接入区域</span><strong>4</strong><p>燃气、供水、桥梁、隧道</p></div>
-          <div class="panel mini"><span>在线点位</span><strong data-live="points">42</strong><p>重点设施连续监测</p></div>
-          <div class="panel mini"><span>当前风险点</span><strong data-live="risks">4</strong><p>1条红色 / 2条橙色</p></div>
-          <div class="panel mini"><span>定位刷新</span><strong data-live="refresh">1.2s</strong><p>边缘节点同步更新</p></div>
-        </div>
-        <section class="panel map-panel" style="height:620px">
-          <div class="panel-title"><div><h3>GIS数字孪生全景图</h3><p>管线、设备、风险、工单和实时状态统一映射</p></div><div class="signal-controls"><button class="small-btn" onclick="showToast('已定位燃气主干线A')">燃气管网</button><button class="small-btn" onclick="showToast('已切换供水输送线B')">供水管线</button><button class="small-btn" onclick="showToast('风险热力图已刷新')">风险热力</button></div></div>
-          <div class="map map-shared" style="height:520px">
-            <div class="scan"></div>
-            <div class="map-legend"><span><i class="gas"></i>燃气管线</span><span><i class="water"></i>供水管线</span><span><i class="bridge"></i>桥梁监测光纤</span><span><i class="tunnel"></i>隧道监测光纤</span></div>
-            <svg viewBox="0 0 1100 560" preserveAspectRatio="none"><g stroke="rgba(111,170,197,.1)"><path d="M0 70H1100M0 140H1100M0 210H1100M0 280H1100M0 350H1100M0 420H1100M0 490H1100"/><path d="M100 0V560M200 0V560M300 0V560M400 0V560M500 0V560M600 0V560M700 0V560M800 0V560M900 0V560M1000 0V560"/></g><g fill="none" stroke-linecap="round"><path d="M50 420C180 350 270 440 390 330S610 260 720 310S880 205 1040 170" stroke="#42d7ff" stroke-width="3"/><path d="M70 120C235 180 320 80 480 150S720 250 1010 350" stroke="#4c8dff" stroke-width="2.5"/><path d="M130 500C290 380 420 485 560 410S810 435 950 500" stroke="#42e6a4" stroke-width="2.5"/><path d="M370 35C440 150 515 175 620 145S790 95 875 35" stroke="#ffad45" stroke-width="2.5" stroke-dasharray="8 9"/></g></svg>
-            <div class="node" style="left:11%;top:72%" data-label="DAS-GM-001"></div><div class="node" style="left:28%;top:60%" data-label="供水B-04"></div><div class="node warn" style="left:42%;top:55%" data-label="桥梁C-S2墩"></div><div class="node danger" style="left:62%;top:52%" data-label="燃气A · K12+430"></div><div class="node" style="left:79%;top:31%" data-label="隧道D-K06"></div><div class="node warn" style="left:88%;top:66%" data-label="供水B-K18"></div>
-          </div>
+        <section class="panel city-integration">
+          <div class="panel-title"><div><h3>长春城市管网与桥梁监测</h3><p>旋转、缩放或点选城市设施；右侧查看振动、候选事件与人工复核记录。</p></div><div class="signal-controls"><select id="cityAssetSelect" aria-label="选择长春监测资产"><option value="CC-G02">卫星路燃气管网</option><option value="CC-W01">人民大街供水管网</option><option value="CC-H03">南湖大路供热管网</option><option value="CC-D04">伊通河沿岸排水管网</option><option value="CC-B05">长春大桥</option><option value="CC-B06">南湖大桥</option></select><button class="small-btn" onclick="cityDataInfo()">数据说明</button><button class="small-btn" onclick="switchView('overview')">返回驾驶舱</button></div></div>
+          <iframe id="cityFrame" class="city-frame" title="长春城市交互监测场景" data-src="city.html?v=20261007" allow="fullscreen"></iframe>
+          <div class="city-gis-note"><span>长春场景示意 · 6 项管网与桥梁资产 · 合成振动信号</span><span>幅度为归一化 RMS；主频与时频图由波形计算，未作实测标定。</span></div>
         </section>
       </div>
 
@@ -355,6 +365,8 @@ function switchView(id){
  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));
  document.getElementById('pageTitle').textContent=viewMeta[id][0];
  document.getElementById('pageSub').textContent=viewMeta[id][1];
+ if(id==='gis')ensureCityFrame();
+ syncCityPlayback();
  window.scrollTo({top:0,behavior:'smooth'});
  setTimeout(()=>resizeAndDraw(),80);
 }
@@ -365,6 +377,55 @@ tickClock();setInterval(tickClock,1000);
 
 function showToast(text){const t=document.getElementById('toast');t.textContent=text;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),1700)}
 window.showToast=showToast;window.switchView=switchView;
+
+/* 本页复用已经发布的城市模型；只在嵌入文档内隐藏重复导航。 */
+let cityReady=false,pendingCityAsset='CC-G02';
+const cityFrame=document.getElementById('cityFrame');
+function ensureCityFrame(){if(!cityFrame.getAttribute('src'))cityFrame.src=cityFrame.dataset.src;}
+function selectCityAsset(id){
+ pendingCityAsset=id;document.getElementById('cityAssetSelect').value=id;
+ if(cityReady)cityFrame.contentDocument.querySelector('.asset-item[data-id="'+id+'"]')?.click();
+}
+function openCityAsset(id){selectCityAsset(id);switchView('gis');}
+function syncCityPlayback(){
+ if(!cityReady)return;
+ const pause=cityFrame.contentDocument.getElementById('pause');
+ const shouldPause=currentView!=='gis';
+ if(pause&&(pause.getAttribute('aria-pressed')==='true')!==shouldPause)pause.click();
+}
+function cityDataInfo(){
+ if(cityReady)cityFrame.contentDocument.getElementById('sources-btn').click();
+ else showToast('城市场景正在加载，请稍候');
+}
+cityFrame.addEventListener('load',()=>{
+ const doc=cityFrame.contentDocument;if(!doc?.getElementById('viewport'))return;
+ const style=doc.createElement('style');
+ style.textContent=`
+   html,body{margin:0;background:#0b1522;overflow-x:hidden}
+   .topbar,.bottom-bar,.sidebar{display:none!important}
+   .workspace{height:100vh;min-height:0;padding:0;gap:12px;grid-template-columns:minmax(0,1fr) 318px}
+   .map-panel{height:100%;min-height:0}.viewport{min-height:350px}
+   .inspector{height:100%;min-height:0;overflow-y:auto;padding:18px 15px;scrollbar-width:thin;scrollbar-color:#33546e #0b1522}
+   .inspector>section,.inspector>.reading-grid,.inspector>.detail-head,.inspector>.detail-meta,.inspector>.review-actions{flex-shrink:0}
+   .chart-section canvas#waveform{height:102px}.chart-section canvas#spectrogram{height:66px}
+   .demo-console{padding:15px 16px}.map-foot span:first-child{display:none}
+   #sources-dialog{max-height:80vh;overflow:auto}
+   @media(max-width:900px){
+     .workspace{display:flex;flex-direction:column;height:auto;min-height:0;gap:12px}
+     .map-panel{height:660px;min-height:660px}.viewport{min-height:400px}
+     .inspector{display:flex;grid-column:auto;height:auto;overflow:visible;gap:0;padding:20px}
+     .chart-section{margin-top:19px}.chart-section:nth-of-type(2){margin-top:19px}
+     .reading-grid,.review-actions{width:100%}.inspector-note{margin-top:12px}
+   }`;
+ doc.head.appendChild(style);cityReady=true;
+ selectCityAsset(pendingCityAsset);syncCityPlayback();
+ new MutationObserver(()=>{
+   const id=doc.getElementById('detail-id').textContent.match(/CC-[A-Z]\d{2}/)?.[0];
+   if(id){pendingCityAsset=id;document.getElementById('cityAssetSelect').value=id;}
+ }).observe(doc.getElementById('detail-id'),{childList:true,subtree:true,characterData:true});
+});
+document.getElementById('cityAssetSelect').addEventListener('change',e=>selectCityAsset(e.target.value));
+window.openCityAsset=openCityAsset;window.cityDataInfo=cityDataInfo;
 
 /* 多周期慢变化：主周期约5分钟，辅助周期7-13分钟 */
 const liveConfigs={
