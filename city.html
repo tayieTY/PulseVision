@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="光脉智瞳长春场景交互演示：点击城市管网与桥梁，体验光纤感知、事件复核与工单处置。所有监测数据为模拟数据。">
+  <title>长春城市监测演示 · 光脉智瞳</title>
+  <link rel="stylesheet" href="assets/city/city.css">
+  <script type="importmap">{"imports":{"three":"./assets/vendor/three.module.js"}}</script>
+  <script type="module" src="assets/city/city.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="返回光脉智瞳首页">
+      <span class="brand-logo-frame"><img class="brand-logo" src="assets/city/pulsevision-logo.png" alt="光脉智瞳 Logo"></span>
+      <span>光脉智瞳<small>PULSEVISION / CITY LAB</small></span>
+    </a>
+    <div class="page-title"><span class="live-dot"></span><h1>长春城市风险监测</h1><span class="pill">交互演示</span></div>
+    <div class="header-right"><span id="clock" class="mono"></span><button id="sources-btn" class="quiet">数据说明</button><button id="fullscreen" class="quiet" aria-label="进入全屏">全屏 ↗</button></div>
+  </header>
+
+  <div class="workspace">
+    <aside class="sidebar panel">
+      <div class="section-title"><span>城市资产</span><span class="micro">ASSET EXPLORER</span></div>
+      <div class="region"><span class="region-dot"></span><div><strong>长春主城区</strong><small>南湖 — 人民大街 — 伊通河</small></div><span class="region-tag">示意</span></div>
+      <label class="search"><span aria-hidden="true">⌕</span><input id="search" placeholder="搜索管段、桥梁或编号" aria-label="搜索城市资产"><kbd>/</kbd></label>
+      <div id="filters" class="filters" aria-label="资产类型筛选">
+        <button data-filter="all" class="active" aria-pressed="true">全部</button><button data-filter="water" aria-pressed="false">供水</button><button data-filter="gas" aria-pressed="false">燃气</button><button data-filter="heat" aria-pressed="false">供热</button><button data-filter="drain" aria-pressed="false">排水</button><button data-filter="bridge" aria-pressed="false">桥梁</button>
+      </div>
+      <div class="list-caption"><span>演示资产</span><span id="asset-count">06</span></div>
+      <div id="asset-list" class="asset-list"></div>
+      <div class="no-assets" id="no-assets" hidden>没有匹配的资产。换一个名称试试。</div>
+      <div class="sidebar-bottom">
+        <div class="section-title"><span>演示统计</span><span class="micro">SIMULATION</span></div>
+        <div class="stats"><div><strong id="total-length">—</strong><small>示意线路 / km</small></div><div><strong id="alert-count" class="amber">—</strong><small>待复核事件</small></div></div>
+        <div class="layer-controls"><label><input id="buildings-layer" type="checkbox" checked> 城市建筑</label><label><input id="labels-layer" type="checkbox" checked> 地名标注</label></div>
+        <div class="simulation-note"><span class="live-dot"></span> 演示引擎运行中<span>合成信号</span></div>
+      </div>
+    </aside>
+
+    <main class="map-panel">
+      <div class="map-header"><div><span class="eyebrow">CHANGCHUN / INFRASTRUCTURE</span><h2>一座城市，一张感知网络</h2><p>点击发光管段或设施点，查看光纤监测与事件记录</p></div><div class="mode-switch" aria-label="城市视角"><button id="mode-3d" class="active" aria-pressed="true">3D 城市</button><button id="mode-2d" aria-pressed="false">俯视地图</button></div></div>
+      <div id="viewport" class="viewport" aria-label="可旋转缩放的长春城市示意模型">
+        <div id="loading" class="loading"><span class="loader"></span><strong>正在构建城市场景</strong><small>加载本地三维资源…</small></div>
+        <div id="map-labels" class="map-labels"></div>
+        <div id="map-error" class="map-error" hidden><h3>三维场景暂时不可用</h3><p id="error-message"></p><p>仍可在左侧选择资产，演示监测、复核和工单流程。</p></div>
+      </div>
+      <div class="map-controls"><button id="zoom-in" aria-label="放大">＋</button><button id="zoom-out" aria-label="缩小">−</button><button id="reset-camera" aria-label="恢复全城视角">⌖</button><button id="capture" aria-label="导出城市画面">↓</button></div>
+      <div class="compass" aria-hidden="true"><svg id="compass-needle" viewBox="0 0 48 48"><path d="M24 6 31 33 24 28 17 33Z"/></svg><span>N</span></div>
+      <div class="legend"><span><i style="--c:#54d9ef"></i>供水</span><span><i style="--c:#ffbd69"></i>燃气</span><span><i style="--c:#ed8dab"></i>供热</span><span><i style="--c:#7fa3ff"></i>排水</span><span><i style="--c:#87e1b8"></i>桥梁</span></div>
+      <div class="map-foot"><span>左键旋转 · 右键平移 · 滚轮缩放</span><span>城市形态及资产路径为场景示意</span></div>
+      <section class="demo-console panel">
+        <div class="console-heading"><div><span class="eyebrow">SCENARIO PLAYER</span><h3>让一次异常，走完处置流程</h3></div><button id="pause" class="quiet" aria-pressed="false">Ⅱ 暂停信号</button></div>
+        <div class="scenario-controls"><label for="scenario">模拟事件</label><select id="scenario"><option value="construction">施工扰动</option><option value="traffic">车辆通行</option><option value="unknown">未知振动</option></select><button id="inject" class="primary">触发场景 <span>→</span></button><button id="reset-demo" class="quiet">重置演示</button></div>
+        <div class="workflow" id="workflow"><span data-step="sense"><i>01</i>光纤感知</span><b>→</b><span data-step="identify"><i>02</i>辅助识别</span><b>→</b><span data-step="review"><i>03</i>人工复核</span><b>→</b><span data-step="workorder"><i>04</i>工单跟进</span></div>
+      </section>
+    </main>
+
+    <aside class="inspector panel" aria-label="选中设施的监测详情">
+      <div class="section-title"><span>设施监测详情</span><span class="micro">FIBER INSIGHT</span></div>
+      <div class="detail-head"><div><span id="detail-id" class="eyebrow"></span><h2 id="detail-name"></h2><p id="detail-location"></p></div><span id="detail-status" class="status"></span></div>
+      <div class="detail-meta"><span id="detail-type"></span><span id="detail-length"></span><span>DAS / 示意监测</span></div>
+      <div class="reading-grid"><div title="最近 1 秒合成信号的均方根幅度，使用归一化单位，未作物理标定"><span>振动幅度 · RMS</span><strong><b id="amplitude">—</b><small>a.u.</small></strong></div><div title="最近 2 秒合成波形功率谱的主峰；弱背景信号不报告稳定主频"><span>主频</span><strong><b id="frequency">—</b><small>Hz</small></strong></div><div><span>辅助类别</span><strong class="event-type" id="event-type">—</strong></div><div><span>候选事件里程</span><strong class="chainage" id="chainage">—</strong></div></div>
+      <section class="chart-section"><div class="chart-title"><h3>光纤振动信号</h3><span class="live-chart-tag">模拟 / 最近 8 s</span></div><canvas id="waveform" height="102" aria-label="合成振动波形"></canvas><div class="chart-axis"><span>−8 s</span><span>−4 s</span><span>现在</span></div></section>
+      <section class="chart-section"><div class="chart-title"><h3>时频特征</h3><span>波形 STFT · 0–100 Hz</span></div><canvas id="spectrogram" height="66" aria-label="合成波形的短时傅里叶频谱"></canvas></section>
+      <section class="event-section"><div class="chart-title"><h3>最新事件</h3><span id="event-time" class="mono">—</span></div><div id="event-card" class="event-card"></div></section>
+      <div class="review-actions"><button id="review" class="quiet">标记已复核</button><button id="create-order" class="primary" disabled>生成模拟工单</button></div>
+      <section class="event-section order-section"><div class="chart-title"><h3>处置记录</h3><button id="export" class="text-button">导出记录 ↗</button></div><div id="orders" class="orders"></div></section>
+      <div class="inspector-note">合成波形 · 幅度未作物理标定 · 主频由波形计算。事件与工单为演示数据。</div>
+    </aside>
+  </div>
+  <footer class="bottom-bar"><span><i></i>光脉智瞳 · 场景演示原型</span><span>所有管网、光缆及建筑为示意模型 · 不代表真实部署或实测性能</span><span class="mono">LOCAL SIMULATION / CC-01</span></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="sources-dialog"><div class="dialog-head"><h2>演示数据说明</h2><button id="close-sources" aria-label="关闭数据说明">×</button></div><p>本演示以长春主城区为叙事背景，采用南湖、人民大街、伊通河及两处桥梁等地名帮助理解场景。城市街区和建筑为程序生成的示意模型，资产中心点、管线路径和光纤长度均用于演示，不是测绘、竣工或真实运营数据。</p><p>波形与时频图由本地演示引擎合成；风险类别、里程、时间和工单由演示操作生成。车辆通行展示正常背景，施工扰动和未知振动展示人工复核流程。桥梁监测为扩展场景，不能据此推导已具备结构病害诊断能力。</p><p>地名关系参考：<a href="https://chc.wenming.cn/gbkjwm/wmcs1/wmcj_wmcs1/201703/t20170302_3130413.html" target="_blank" rel="noopener noreferrer">长春文明网 · 南湖大桥</a>、<a href="https://dfz.jl.gov.cn/jgdg/201910/t20191031_6126512.html" target="_blank" rel="noopener noreferrer">吉林省地方志 · 城南街巷与南关大桥</a>。三维渲染采用本地打包的 <a href="https://threejs.org/" target="_blank" rel="noopener noreferrer">Three.js</a>，不需要地图 API 密钥。</p><p>后续接入真实设备时，可替换资产坐标、光纤标定、事件接口及工单服务；实际性能需以对应设备和现场测试结果为准。</p></dialog>
+</body>
+</html>
